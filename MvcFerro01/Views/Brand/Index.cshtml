@@ -23,7 +23,7 @@
             </a>
         </div>
     </div>
-        <form method="get" class="form-inline" asp-action="Index">
+    <form method="get" class="form-inline" asp-action="Index">
         <div class="d-flex flex-row align-items-center">
             <div class="col-auto mx-1">
                 <label for="pageSize">Show:</label>
@@ -34,7 +34,7 @@
                         var options = new List<int> { 5, 10, 15, 20 };
                         foreach (var option in options)
                         {
-                            if(ViewBag.currentPageSize==option)
+                            if (ViewBag.currentPageSize == option)
                             {
                                 <option selected value="@option">@option</option>
 
@@ -110,18 +110,10 @@
             }
         </tbody>
     </table>
+    <partial name="_Pager" model="@Model" />
 
-    <div class="d-flex">
-        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions
-   {
-       UlElementClasses = new[] { "pagination" },
-       LiElementClasses = new[] { "page-item" },
-       PageClasses = new[] { "page-link" },
-       DisplayLinkToIndividualPages = true,
-       DisplayPageCountAndCurrentLocation = false,
-       MaximumPageNumbersToDisplay = 10
-   })
-    </div>
+
+  
 
 </div>
 @section Scripts {
