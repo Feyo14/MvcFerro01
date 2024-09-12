@@ -14,6 +14,9 @@ namespace MvcFerro01.ViewModels.Brand.BrandEditVm
         [MaxLength(256, ErrorMessage = "{0} must have less than 257 characters")]
         public string BrandName { get; set; } = null!;
         [ValidateNever]
+        public bool Active { get; set; }
+        [ValidateNever]
+
 
         public IEnumerable<SelectListItem> Shoes { get; set; } = null!;
 

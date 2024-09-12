@@ -9,6 +9,8 @@ namespace MvcFerro01.ViewModels.Brand.BrandListVm
         [DisplayName("BrandName")]
 
         public string BrandName { get; set; } = null!;
+        public bool Active { get; set; }
+
 
     }
 }

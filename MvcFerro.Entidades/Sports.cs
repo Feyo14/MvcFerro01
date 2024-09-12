@@ -13,6 +13,8 @@ namespace MvcFerro.Entidades
         public int SportId { get; set; }
         [StringLength(20)]
         public string SportName { get; set; } = null!;
+        public bool Active { get; set; }
+
         public ICollection<Shoes> shoes { get; set; } = new List<Shoes>();
     }
 }
