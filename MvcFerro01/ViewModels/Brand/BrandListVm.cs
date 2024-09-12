@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace EFCoresFerro.Web2.ViewModels.Brand.BrandListVm
+namespace MvcFerro01.ViewModels.Brand.BrandListVm
 {
     public class BrandListVm
     {

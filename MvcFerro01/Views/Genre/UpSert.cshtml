@@ -1,25 +1,25 @@
-﻿@using MvcFerro01.ViewModels.Brand.BrandEditVm
-@model BrandEditVm
+﻿@using MvcFerro01.ViewModels.Genre.GenreEditVm
+@model GenreEditVm
 @{
-    ViewData["Title"] = "New/Edit Marca";
+    ViewData["Title"] = "New/Edit Genre";
 }
 <form method="post" asp-action="UpSert" class="w-75">
-    <input type="hidden" asp-for="BrandId" />
+    <input type="hidden" asp-for="GenreId" />
 
     <div class="border p-3 bg-white">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group row">
-            <h2 class="text-info pl-3">@(Model.BrandId==0?"Add Marca":"Edit Marca")</h2>
+            <h2 class="text-info pl-3">@(Model.GenreId == 0 ? "Add Marca" : "Edit Marca")</h2>
 
         </div>
         <div class="form-group row py-2">
-            <label asp-for="BrandName"></label>
-            <input asp-for="BrandName" class="form-control" />
-            <span asp-validation-for="BrandName" class="text-danger"></span>
+            <label asp-for="GenreName"></label>
+            <input asp-for="GenreName" class="form-control" />
+            <span asp-validation-for="GenreName" class="text-danger"></span>
 
         </div>
        
-        @if (Model.BrandId == 0)
+        @if (Model.GenreId == 0)
         {
             <button type="submit" class="btn btn-primary">
                 <i class="bi bi-floppy2-fill"></i>

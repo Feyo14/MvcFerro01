@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace EFCoresFerro.Web2.ViewModels.Shoe.ShoeEditVm
+namespace MvcFerro01.ViewModels.Shoe.ShoeEditVm
 {
     public class ShoeEditVm
     {

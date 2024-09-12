@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using X.PagedList.Extensions;
-using EFCoresFerro.Web2.ViewModels.Shoe.ShoeEditVm;
 using MvcFerro.Servicios.Interfaces;
 using MvcFerro.Entidades;
+using MvcFerro01.ViewModels.Shoe.ShoeEditVm;
 namespace MvcFerro.Controllers
 {
     public class ShoeController : Controller

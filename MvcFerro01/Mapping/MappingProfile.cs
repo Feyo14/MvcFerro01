@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
-using EFCoresFerro.Web2.ViewModels.Brand.BrandEditVm;
-using EFCoresFerro.Web2.ViewModels.Brand.BrandListVm;
-using EFCoresFerro.Web2.ViewModels.Shoe.ShoeEditVm;
 using MvcFerro.Entidades;
+using MvcFerro01.ViewModels.Brand.BrandEditVm;
+using MvcFerro01.ViewModels.Brand.BrandListVm;
+using MvcFerro01.ViewModels.Genre.GenreEditVm;
+using MvcFerro01.ViewModels.Genre.GenreListVm;
+using MvcFerro01.ViewModels.Shoe.ShoeEditVm;
 
-namespace MvcFerro.Mapping
+namespace MvcFerro01.Mapping
 {
     public class MappingProfile : Profile
     {
@@ -12,8 +14,17 @@ namespace MvcFerro.Mapping
         {
             LoadBrandMapping();
             LoadShoeMapping();
+            LoadGenreMapping();
 
-            
+
+        }
+
+        private void LoadGenreMapping()
+        {
+
+            CreateMap<Genre, GenreListVm>();
+
+            CreateMap<Genre, GenreEditVm>().ReverseMap();
         }
 
         private void LoadShoeMapping()

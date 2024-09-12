@@ -1,17 +1,21 @@
-﻿using MvcFerro.Datos;
+﻿using EFCoresFerro.Datos.Repositorio;
+using MvcFerro.Datos;
 using MvcFerro.Datos.Interfaces;
 using MvcFerro.Entidades;
 
 namespace EFCore3.DATOS.Repositorio
 {
-    public class RepositorioGenre : IRepositorioGenre
+    public class RepositorioGenre : GenericRepository<Genre>, IRepositorioGenre
     {
         private readonly EFCoresDbContext context;
-
-        public RepositorioGenre(EFCoresDbContext context)
+        public RepositorioGenre(EFCoresDbContext db) : base(db)
         {
-            this.context = context;
+            context = db ?? throw new ArgumentNullException(nameof(db));
         }
+      //  public RepositorioGenre(EFCoresDbContext context)
+       // {
+        //    this.context = context;
+        //}
         public bool existe(Genre brand)
         {
             if (brand.GenreId == 0)

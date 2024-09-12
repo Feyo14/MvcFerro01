@@ -3,16 +3,16 @@ using Microsoft.AspNetCore.Mvc;
 using X.PagedList.Extensions;
 using MvcFerro.Servicios.Interfaces;
 using MvcFerro.Entidades;
-using MvcFerro01.ViewModels.Brand.BrandListVm;
-using MvcFerro01.ViewModels.Brand.BrandEditVm;
+using MvcFerro01.ViewModels.Genre.GenreListVm;
+using MvcFerro01.ViewModels.Genre.GenreEditVm;
 
 namespace MvcFerro01.Controllers
 {
-    public class BrandController : Controller
+    public class GenreController : Controller
     {
-        private readonly IServicioBrands? service;
+        private readonly IServicioGenre? service;
         private readonly IMapper? _mapper;
-        public BrandController(IServicioBrands? BService,
+        public GenreController(IServicioGenre? BService,
             IMapper mapper)
         {
             service = BService;
@@ -24,21 +24,21 @@ namespace MvcFerro01.Controllers
 
             int pageNumber = page ?? 1;
             ViewBag.currentPageSize = pageSize;
-            IEnumerable<Brand>? brand;
+            IEnumerable<Genre>? brand;
             if (!viewAll)
             {
                 if (!string.IsNullOrEmpty(searchTerm))
                 {
                     brand = service?
-                        .GetAll(orderBy: o => o.OrderBy(c => c.BrandName),
-                            filter: c => c.BrandName.Contains(searchTerm));
+                        .GetAll(orderBy: o => o.OrderBy(c => c.GenreName),
+                            filter: c => c.GenreName.Contains(searchTerm));
                           //  || c.BrandName!.Contains(searchTerm));
                     ViewBag.currentSearchTerm = searchTerm;
                 }
                 else
                 {
                     brand = service?
-                        .GetAll(orderBy: o => o.OrderBy(c => c.BrandName));
+                        .GetAll(orderBy: o => o.OrderBy(c => c.GenreName));
 
                 }
 
@@ -46,10 +46,10 @@ namespace MvcFerro01.Controllers
             else
             {
                 brand = service?
-                    .GetAll(orderBy: o => o.OrderBy(c => c.BrandName));
+                    .GetAll(orderBy: o => o.OrderBy(c => c.GenreName));
 
             }
-                 var BrandVm = _mapper?.Map<List<BrandListVm>>(brand)
+                 var BrandVm = _mapper?.Map<List<GenreListVm>>(brand)
                     .ToPagedList(pageNumber, pageSize);
 
 
@@ -71,21 +71,21 @@ namespace MvcFerro01.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "Dependencias no están configuradas correctamente");
             }
-            BrandEditVm marcavm;
+            GenreEditVm marcavm;
             if (id == null || id == 0)
             {
-                marcavm = new BrandEditVm();
+                marcavm = new GenreEditVm();
             }
             else
             {
                 try
                 {
-                    Brand? marc = service.GetBrandsPorId(id.Value);
+                    Genre? marc = service.GetGenrePorId(id.Value);
                     if (marc == null)
                     {
                         return NotFound();
                     }
-                    marcavm = _mapper.Map<BrandEditVm>(marc);
+                    marcavm = _mapper.Map<GenreEditVm>(marc);
                     return View(marcavm);
                 }
                 catch (Exception ex)
@@ -103,7 +103,7 @@ namespace MvcFerro01.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public IActionResult UpSert(BrandEditVm mar)
+        public IActionResult UpSert(GenreEditVm mar)
         {
             if (!ModelState.IsValid)
             {
@@ -117,7 +117,7 @@ namespace MvcFerro01.Controllers
 
             try
             {
-                Brand marc = _mapper.Map<Brand>(mar);
+                Genre marc = _mapper.Map<Genre>(mar);
 
                 if (service.existe(marc))
                 {
@@ -146,7 +146,7 @@ namespace MvcFerro01.Controllers
             {
                 return NotFound();
             }
-            Brand? category= service?.GetBrandsPorId(id.Value);
+            Genre? category= service?.GetGenrePorId(id.Value);
             if (category is null)
             {
                 return NotFound();

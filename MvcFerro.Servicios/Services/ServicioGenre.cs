@@ -3,6 +3,7 @@ using MvcFerro.Datos;
 using MvcFerro.Datos.Interfaces;
 using MvcFerro.Entidades;
 using MvcFerro.Servicios.Interfaces;
+using System.Linq.Expressions;
 
 namespace EFCore3.Servicios.Servicios
 {
@@ -15,6 +16,11 @@ namespace EFCore3.Servicios.Servicios
             context=new EFCoresDbContext();
             repo = new RepositorioGenre(context);
         }
+        public IEnumerable<Genre>? GetAll(Expression<Func<Genre, bool>>? filter = null, Func<IQueryable<Genre>, IOrderedQueryable<Genre>>? orderBy = null, string? propertiesNames = null)
+        {
+            return repo!.GetAll(filter, orderBy, propertiesNames);
+        }
+
         public void Agregar(Genre g)
         {
             try
