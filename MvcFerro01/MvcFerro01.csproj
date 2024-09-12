@@ -6,4 +6,14 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MvcFerro.Entidades\MvcFerro.Entidades.csproj" />
+    <ProjectReference Include="..\MvcFerro.Loc\MvcFerro.Loc.csproj" />
+    <ProjectReference Include="..\MvcFerro.Servicios\MvcFerro.Servicios.csproj" />
+  </ItemGroup>
+
 </Project>
