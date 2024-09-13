@@ -95,21 +95,21 @@ namespace MvcFerro01.Controllers
             {
                 shoevm = new ShoeEditVm();
                 shoevm.Brand = serviceB!
-                    .GetAll()
+                    .GetAll(orderBy: q => q.OrderBy(c => c.BrandName))
                     .Select(c => new SelectListItem
                     {
                         Text = c.BrandName,
                         Value = c.BrandId.ToString()
                     }).ToList();
                 shoevm.Genre = serviceG!
-                    .GetAll()
+                    .GetAll(orderBy: q => q.OrderBy(c => c.GenreName))
                     .Select(s => new SelectListItem
                     {
                         Text = s.GenreName,
                         Value = s.GenreId.ToString()
                     }).ToList();
                 shoevm.Sport = serviceS!
-                   .GetAll()
+                   .GetAll(orderBy: q => q.OrderBy(c => c.SportName))
                    .Select(s => new SelectListItem
                    {
                        Text = s.SportName,
