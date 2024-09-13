@@ -17,8 +17,9 @@ namespace MvcFerro01.ViewModels.Shoe.ShoeEditVm
         public int BrandId { get; set; }
         public int GenreId { get; set; }
         public int SportId { get; set; }
-
+        public bool Active { get; set; }
         [ValidateNever]
+
         public IEnumerable<SelectListItem> Brands { get; set; } = null!;
         [ValidateNever]
 

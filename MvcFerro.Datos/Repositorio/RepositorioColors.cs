@@ -1,18 +1,19 @@
-﻿using MvcFerro.Datos;
+﻿using EFCoresFerro.Datos.Repositorio;
+using MvcFerro.Datos;
 using MvcFerro.Datos.Interfaces;
 using MvcFerro.Entidades;
 
 namespace EFCore3.DATOS.Repositorio
 {
-    public class RepositorioColors : IRepositorioColors
+    public class RepositorioColors : GenericRepository<Colors>, IRepositorioColors
     {
         private readonly EFCoresDbContext context;
 
-        public RepositorioColors(EFCoresDbContext context)
+        public RepositorioColors(EFCoresDbContext db) : base(db)
         {
-            this.context = context;
+            context = db ?? throw new ArgumentNullException(nameof(db));
         }
-      
+
         public void Agregar(Colors colors)
         {
             context.Colors.Add(colors);

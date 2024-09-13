@@ -5,6 +5,8 @@ using MvcFerro01.ViewModels.Brand.BrandListVm;
 using MvcFerro01.ViewModels.Genre.GenreEditVm;
 using MvcFerro01.ViewModels.Genre.GenreListVm;
 using MvcFerro01.ViewModels.Shoe.ShoeEditVm;
+using MvcFerro01.ViewModels.Sport.SportEditVm;
+using MvcFerro01.ViewModels.Sport.SportListVm;
 
 namespace MvcFerro01.Mapping
 {
@@ -15,8 +17,15 @@ namespace MvcFerro01.Mapping
             LoadBrandMapping();
             LoadShoeMapping();
             LoadGenreMapping();
+            LoadSportMapping();
 
+        }
 
+        private void LoadSportMapping()
+        {
+            CreateMap<Sports, SportListVm>();
+
+            CreateMap<Sports, SportEditVm>().ReverseMap();
         }
 
         private void LoadGenreMapping()

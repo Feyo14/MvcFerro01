@@ -1,20 +1,21 @@
 ﻿
 using EFCoresFerro.Datos;
+using EFCoresFerro.Datos.Repositorio;
 using MvcFerro.Datos;
 using MvcFerro.Datos.Interfaces;
 using MvcFerro.Entidades;
 
 namespace EFCore3.DATOS.Repositorio
 {
-    public class RepositorioSports : IRepositorioSports
+    public class RepositorioSports : GenericRepository<Sports>, IRepositorioSports
     {
         private readonly EFCoresDbContext context;
 
-        public RepositorioSports(EFCoresDbContext context)
+        public RepositorioSports(EFCoresDbContext db) : base(db)
         {
-            this.context = context;
+            context = db ?? throw new ArgumentNullException(nameof(db));
         }
-      
+
         public void Agregar(Sports sports)
         {
             context.Sports.Add(sports);

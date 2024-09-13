@@ -1,6 +1,7 @@
 ﻿
 
 using MvcFerro.Entidades;
+using System.Linq.Expressions;
 
 namespace MvcFerro.Datos.Interfaces
 {
@@ -14,6 +15,8 @@ namespace MvcFerro.Datos.Interfaces
         public bool existe(Shoes d);
         Shoes? GetPorName(string descrip);
         public bool existeShoeSize(int s);
+        IEnumerable<Shoes>? GetAll(Expression<Func<Shoes, bool>>? filter, Func<IQueryable<Shoes>, IOrderedQueryable<Shoes>>? orderBy, string? propertiesNames);
+
 
 
 

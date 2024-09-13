@@ -1,5 +1,5 @@
-﻿@model IPagedList<GenreListVm>
-@using MvcFerro01.ViewModels.Genre.GenreListVm
+﻿@model IPagedList<SportListVm>
+@using MvcFerro01.ViewModels.Sport.SportListVm
 @using X.PagedList
 @using X.Web.PagedList
 
@@ -7,23 +7,23 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-    ViewData["Title"] = "Genre List";
+    ViewData["Title"] = "Brand List";
 }
 @Html.AntiForgeryToken();
 <div class="container">
     <div class="row mb-3">
         <div class="col-6">
-            <h3>Genre List</h3>
+            <h3>Sport List</h3>
 
         </div>
         <div class="col-6 text-end">
-            <a asp-controller="Genre" asp-action="UpSert" class="btn btn-primary">
+            <a asp-controller="Sport" asp-action="UpSert" class="btn btn-primary">
                 <i class="bi bi-plus-circle"></i>
                 Nuevo
             </a>
         </div>
     </div>
-        <form method="get" class="form-inline" asp-action="Index">
+    <form method="get" class="form-inline" asp-action="Index">
         <div class="d-flex flex-row align-items-center">
             <div class="col-auto mx-1">
                 <label for="pageSize">Show:</label>
@@ -34,7 +34,7 @@
                         var options = new List<int> { 5, 10, 15, 20 };
                         foreach (var option in options)
                         {
-                            if(ViewBag.currentPageSize==option)
+                            if (ViewBag.currentPageSize == option)
                             {
                                 <option selected value="@option">@option</option>
 
@@ -64,7 +64,9 @@
     <table class="table table-bordered table-hover">
         <thead>
             <tr>
-                <th style="width:60%">Genero</th>
+                <th style="width:50%">Sport</th>
+                <th style="width:35%">Active</th>
+
                 <th style="width:15%">Actions</th>
 
             </tr>
@@ -74,18 +76,31 @@
             {
                 foreach (var item in Model)
                 {
-                    <tr id="@item.GenreId">
+                    <tr id="@item.SportId">
                         <td>
-                            @item.GenreName
+                            @item.SportName
 
                         </td>
-         
                         <td>
-                            <a class="btn btn-warning" asp-controller="Brand" asp-action="UpSert" asp-route-id="@item.GenreId">
+                            @if (item.Active == true)
+                            {
+                                <td>
+                             Activo
+                             </td>
+                            }
+                            else
+                            {<td>
+                                No Activo
+                                </td>
+                            }
+
+                        </td>
+                        <td>
+                            <a class="btn btn-warning" asp-controller="Sport" asp-action="UpSert" asp-route-id="@item.SportId">
                                 <i class="bi bi-pencil-square"></i>&nbsp;
                                 Edit
                             </a>
-                            <a onclick="Delete('/Genre/Delete/@item.GenreId',@item.GenreId,'@item.GenreId')" class="btn btn-danger">
+                            <a onclick="Delete('/Sport/Delete/@item.SportId',@item.SportId,'@item.SportName')" class="btn btn-danger">
                                 <i class="bi bi-trash-fill"></i>
                                 Delete
                             </a>
@@ -97,7 +112,7 @@
             {
                 <tr>
                     <td colspan="2" class="text-center">
-                        F?uck!!! No marcas added yet!
+                        No hay mas Sport !
 
                     </td>
                 </tr>
@@ -106,9 +121,9 @@
         </tbody>
     </table>
     <partial name="_Pager" model="@Model" />
- 
-  
 
+
+  
 
 </div>
 @section Scripts {

@@ -1,19 +1,20 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using EFCoresFerro.Datos.Repositorio;
+using Microsoft.EntityFrameworkCore;
 using MvcFerro.Datos;
 using MvcFerro.Datos.Interfaces;
 using MvcFerro.Entidades;
 
 namespace EFCore3.DATOS.Repositorio
 {
-    public class RepositorioShoes : IRepositorioShoes
+    public class RepositorioShoes : GenericRepository<Shoes>, IRepositorioShoes
     {
         private readonly EFCoresDbContext context;
 
-        public RepositorioShoes(EFCoresDbContext _context)
+        public RepositorioShoes(EFCoresDbContext db) : base(db)
         {
-           context = _context;
+            context = db ?? throw new ArgumentNullException(nameof(db));
         }
-      
+
         public void Agregar(Shoes shoe)
         {
             context.Shoes.Add(shoe);
