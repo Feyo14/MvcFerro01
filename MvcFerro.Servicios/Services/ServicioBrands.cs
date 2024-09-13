@@ -2,7 +2,7 @@
 using EFCoresFerro.DATOS.Repositorio;
 using MvcFerro.Datos;
 using MvcFerro.Datos.Interfaces;
-using MvcFerro.Entidades;
+using MvcFerro01.Entidades;
 using MvcFerro.Servicios.Interfaces;
 using System.Linq.Expressions;
 
@@ -19,7 +19,7 @@ namespace EFCore3.Servicios.Servicios
             context=new EFCoresDbContext();
             repo = new RepositorioBrands(context);
         }
-        public void Agregar(Brand brands)
+        public void Agregar(Brands brands)
         {
             try
             {
@@ -40,7 +40,7 @@ namespace EFCore3.Servicios.Servicios
             }
         }
 
-        public void Borrar(Brand Brand)
+        public void Borrar(Brands Brand)
         {
             var BrandInDb = context.Brands.Find(Brand.BrandId);
             if (BrandInDb != null)
@@ -55,11 +55,11 @@ namespace EFCore3.Servicios.Servicios
             }
         }
 
-        public void Editar(Brand pais)
+        public void Editar(Brands pais)
         {
             throw new NotImplementedException();
         }
-        public bool existe(Brand b)
+        public bool existe(Brands b)
         {
             try
             {
@@ -73,7 +73,7 @@ namespace EFCore3.Servicios.Servicios
         }
 
 
-        public List<Brand> GetLista()
+        public List<Brands> GetLista()
         {
             
                 return repo.GetLista(); 
@@ -81,17 +81,17 @@ namespace EFCore3.Servicios.Servicios
 
 
         }
-        public Brand? GetBrandsPorId(int b)
+        public Brands? GetBrandsPorId(int b)
         {
             return repo.GetBrandsPorId(b);
         }
 
-        public Brand? GetPorName(string nombre)
+        public Brands? GetPorName(string nombre)
         {
             return repo.GetPorName(nombre);
         }
 
-        public IEnumerable<Brand>? GetAll(Expression<Func<Brand, bool>>? filter = null, Func<IQueryable<Brand>, IOrderedQueryable<Brand>>? orderBy = null, string? propertiesNames = null)
+        public IEnumerable<Brands>? GetAll(Expression<Func<Brands, bool>>? filter = null, Func<IQueryable<Brands>, IOrderedQueryable<Brands>>? orderBy = null, string? propertiesNames = null)
         {
             return repo!.GetAll(filter, orderBy, propertiesNames);
         }

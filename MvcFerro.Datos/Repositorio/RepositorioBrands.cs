@@ -1,12 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using EFCoresFerro.Datos.Repositorio;
-using MvcFerro.Entidades;
+using MvcFerro01.Entidades;
 using MvcFerro.Datos.Interfaces;
 using MvcFerro.Datos;
 
 namespace EFCoresFerro.DATOS.Repositorio
 {
-    public class RepositorioBrands : GenericRepository<Brand>, IRepositorioBrands
+    public class RepositorioBrands : GenericRepository<Brands>, IRepositorioBrands
     {
         private readonly EFCoresDbContext context;
 
@@ -15,16 +15,16 @@ namespace EFCoresFerro.DATOS.Repositorio
             context = db ?? throw new ArgumentNullException(nameof(db));
         }
 
-        public void Agregar(Brand brands)
+        public void Agregar(Brands brands)
         {
             context.Brands.Add(brands);
         }
 
-        public void Borrar(Brand brands)
+        public void Borrar(Brands     brands)
         {
             context.Brands.Remove(brands);
         }
-        public bool existe(Brand brand)
+        public bool existe(Brands brand)
         {
             if (brand.BrandId == 0)
             {
@@ -36,13 +36,13 @@ namespace EFCoresFerro.DATOS.Repositorio
             }
 
         }
-        public void Editar(Brand brands)
+        public void Editar(Brands brands)
         {
             context.Brands.Update(brands);      
         }
 
         
-        public List<Brand> GetLista()
+        public List<Brands> GetLista()
         {
             return context.Brands
                 .OrderBy(p=>p.BrandName)
@@ -50,12 +50,12 @@ namespace EFCoresFerro.DATOS.Repositorio
 
                 .ToList();
         }
-        public Brand? GetBrandsPorId(int b)
+        public Brands? GetBrandsPorId(int b)
         {
             return context.Brands
                  .FirstOrDefault(t => t.BrandId == b);
         }
-        public Brand? GetPorName(string nombre)
+        public Brands? GetPorName(string nombre)
         {
             return context.Brands
                          .FirstOrDefault(te => te.BrandName == nombre);

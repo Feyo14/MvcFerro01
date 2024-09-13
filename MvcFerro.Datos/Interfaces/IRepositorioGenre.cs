@@ -1,19 +1,19 @@
-﻿using MvcFerro.Entidades;
+﻿using MvcFerro01.Entidades;
 using System.Linq.Expressions;
 
 namespace MvcFerro.Datos.Interfaces
 {
     public interface IRepositorioGenre
     {
-        List<Genre> GetLista();
-        void Agregar(Genre genre);
-        void Borrar(Genre genre);
-        void Editar(Genre genre);
-        public bool existe(Genre genre);
-        Genre? GetGenrePorId(int genreid);
-        Genre? GetPorName(string nombre);
+        List<Genres> GetLista();
+        void Agregar(Genres genre);
+        void Borrar(Genres genre);
+        void Editar(Genres genre);
+        public bool existe(Genres genre);
+        Genres? GetGenrePorId(int genreid);
+        Genres? GetPorName(string nombre);
 
-        IEnumerable<Genre>? GetAll(Expression<Func<Genre, bool>>? filter, Func<IQueryable<Genre>, IOrderedQueryable<Genre>>? orderBy, string? propertiesNames);
+        IEnumerable<Genres>? GetAll(Expression<Func<Genres, bool>>? filter, Func<IQueryable<Genres>, IOrderedQueryable<Genres>>? orderBy, string? propertiesNames);
 
 
 

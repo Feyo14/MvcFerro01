@@ -1,13 +1,14 @@
-﻿using MvcFerro.Entidades;
+﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace MvcFerro.Entidades
+namespace MvcFerro01.Entidades
 {
     //  [Table("Genre")]
 
-    // [Index(nameof(GenreName), nameof(Genre.GenreName), IsUnique = true)]
+   //  [Index(nameof(GenreName), nameof(Genre.GenreName), IsUnique = true)]
 
-    public  class Genre
+    public  class Genres
     {
         public int GenreId { get; set; }
         [StringLength(10)]

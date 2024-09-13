@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
 
-namespace MvcFerro.Entidades
+namespace MvcFerro01.Entidades
 {
     // [Table("Sports")]
 

@@ -1,6 +1,6 @@
 ﻿using MvcFerro.Datos;
 using MvcFerro.Datos.Interfaces;
-using MvcFerro.Entidades;
+using MvcFerro01.Entidades;
 
 namespace EFCore3.DATOS.Repositorio
 {

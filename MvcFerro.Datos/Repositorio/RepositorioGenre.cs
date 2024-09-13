@@ -1,11 +1,11 @@
 ﻿using EFCoresFerro.Datos.Repositorio;
 using MvcFerro.Datos;
 using MvcFerro.Datos.Interfaces;
-using MvcFerro.Entidades;
+using MvcFerro01.Entidades;
 
 namespace EFCore3.DATOS.Repositorio
 {
-    public class RepositorioGenre : GenericRepository<Genre>, IRepositorioGenre
+    public class RepositorioGenre : GenericRepository<Genres>, IRepositorioGenre
     {
         private readonly EFCoresDbContext context;
         public RepositorioGenre(EFCoresDbContext db) : base(db)
@@ -16,7 +16,7 @@ namespace EFCore3.DATOS.Repositorio
        // {
         //    this.context = context;
         //}
-        public bool existe(Genre brand)
+        public bool existe(Genres brand)
         {
             if (brand.GenreId == 0)
             {
@@ -28,33 +28,33 @@ namespace EFCore3.DATOS.Repositorio
             }
 
         }
-        public Genre? GetGenrePorId(int b)
+        public Genres? GetGenrePorId(int b)
         {
             return context.Genres
                  .FirstOrDefault(t => t.GenreId == b);
         }
-        public Genre? GetPorName(string nombre)
+        public Genres? GetPorName(string nombre)
         {
             return context.Genres
                          .FirstOrDefault(te => te.GenreName == nombre);
         }
-        public void Agregar(Genre g)
+        public void Agregar(Genres g)
         {
             context.Genres.Add(g);
         }
 
-        public void Borrar(Genre g)
+        public void Borrar(Genres g)
         {
             context.Genres.Remove(g);
         }
 
-        public void Editar(Genre g)
+        public void Editar(Genres g)
         {
             context.Genres.Update(g);      
         }
 
         
-        public List<Genre> GetLista()
+        public List<Genres> GetLista()
         {
             return context.Genres
                 .OrderBy(p=>p.GenreName)

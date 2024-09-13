@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace MvcFerro.Entidades
+namespace MvcFerro01.Entidades
 {
     // [Table("Colors")]
 
@@ -13,7 +13,6 @@ namespace MvcFerro.Entidades
         [StringLength(50)]
         public string ColorName { get; set; } = null!;
         public bool Active { get; set; }
-        public ICollection<Shoes> shoes { get; set; } = new List<Shoes>();
 
     }
 }

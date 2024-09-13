@@ -1,10 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore;
 
-namespace MvcFerro.Entidades
+using System.ComponentModel.DataAnnotations;
+
+namespace MvcFerro01.Entidades
 {
     //  [Index(nameof(BrandName), nameof(Brands.BrandName), IsUnique = true)]
 
-    public  class Brand
+    public  class Brands
     {
       
         public int BrandId { get; set; }

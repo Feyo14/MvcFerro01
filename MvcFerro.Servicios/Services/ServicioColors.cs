@@ -1,7 +1,7 @@
 ﻿using EFCore3.DATOS.Repositorio;
 using MvcFerro.Datos;
 using MvcFerro.Datos.Interfaces;
-using MvcFerro.Entidades;
+using MvcFerro01.Entidades;
 using MvcFerro.Servicios.Interfaces;
 using System.Linq.Expressions;
 

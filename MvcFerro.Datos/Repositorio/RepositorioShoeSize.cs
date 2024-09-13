@@ -3,7 +3,7 @@ using EFCoresFerro.Datos;
 using Microsoft.EntityFrameworkCore;
 using MvcFerro.Datos;
 using MvcFerro.Datos.Interfaces;
-using MvcFerro.Entidades;
+using MvcFerro01.Entidades;
 using System;
 using System.Numerics;
 

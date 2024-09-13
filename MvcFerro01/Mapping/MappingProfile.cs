@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using MvcFerro.Entidades;
+using MvcFerro01.Entidades;
 using MvcFerro01.ViewModels.Brand.BrandEditVm;
 using MvcFerro01.ViewModels.Brand.BrandListVm;
 using MvcFerro01.ViewModels.Color.ColorEditVm;
@@ -7,6 +7,7 @@ using MvcFerro01.ViewModels.Color.ColorListVm;
 using MvcFerro01.ViewModels.Genre.GenreEditVm;
 using MvcFerro01.ViewModels.Genre.GenreListVm;
 using MvcFerro01.ViewModels.Shoe.ShoeEditVm;
+using MvcFerro01.ViewModels.Shoe.ShoeListVm;
 using MvcFerro01.ViewModels.Sport.SportEditVm;
 using MvcFerro01.ViewModels.Sport.SportListVm;
 
@@ -41,21 +42,23 @@ namespace MvcFerro01.Mapping
         private void LoadGenreMapping()
         {
 
-            CreateMap<Genre, GenreListVm>();
+            CreateMap<Genres, GenreListVm>();
 
-            CreateMap<Genre, GenreEditVm>().ReverseMap();
+            CreateMap<Genres, GenreEditVm>().ReverseMap();
         }
 
         private void LoadShoeMapping()
         {
+            CreateMap<Shoes, ShoeListVm>();
+
             CreateMap<Shoes, ShoeEditVm>().ReverseMap();
         }
 
         private void LoadBrandMapping()
         {
-            CreateMap<Brand, BrandListVm>();
+            CreateMap<Brands, BrandListVm>();
 
-            CreateMap<Brand, BrandEditVm>().ReverseMap();
+            CreateMap<Brands, BrandEditVm>().ReverseMap();
         }
     }
 }

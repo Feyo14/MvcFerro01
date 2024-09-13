@@ -2,9 +2,10 @@
 using Microsoft.EntityFrameworkCore;
 using MvcFerro.Datos;
 using MvcFerro.Datos.Interfaces;
-using MvcFerro.Entidades;
+using MvcFerro01.Entidades;
 using MvcFerro.Servicios.Interfaces;
 using System.Linq.Expressions;
+using NuGet.Protocol.Core.Types;
 
 namespace EFCore3.Servicios.Servicios
 {
@@ -129,6 +130,15 @@ private readonly EFCoresDbContext _dbContext;
             return repo!.GetAll(filter, orderBy, propertiesNames);
         }
 
+        public Shoes? Get(Expression<Func<Shoes, bool>> filter, string? propertiesNames = null, bool tracked = true)
+        {
+            if (repo == null)
+            {
+                throw new ApplicationException("Dependency not set");
+            }
+
+            return repo.Get(filter, propertiesNames, tracked);
+        }
     }
 
   

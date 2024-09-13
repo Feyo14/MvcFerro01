@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using X.PagedList.Extensions;
 using MvcFerro.Servicios.Interfaces;
-using MvcFerro.Entidades;
+using MvcFerro01.Entidades;
 using MvcFerro01.ViewModels.Genre.GenreListVm;
 using MvcFerro01.ViewModels.Genre.GenreEditVm;
 
@@ -24,7 +24,7 @@ namespace MvcFerro01.Controllers
 
             int pageNumber = page ?? 1;
             ViewBag.currentPageSize = pageSize;
-            IEnumerable<Genre>? brand;
+            IEnumerable<Genres>? brand;
             if (!viewAll)
             {
                 if (!string.IsNullOrEmpty(searchTerm))
@@ -80,7 +80,7 @@ namespace MvcFerro01.Controllers
             {
                 try
                 {
-                    Genre? marc = service.GetGenrePorId(id.Value);
+                    Genres? marc = service.GetGenrePorId(id.Value);
                     if (marc == null)
                     {
                         return NotFound();
@@ -117,7 +117,7 @@ namespace MvcFerro01.Controllers
 
             try
             {
-                Genre marc = _mapper.Map<Genre>(mar);
+                Genres marc = _mapper.Map<Genres>(mar);
 
                 if (service.existe(marc))
                 {
@@ -146,7 +146,7 @@ namespace MvcFerro01.Controllers
             {
                 return NotFound();
             }
-            Genre? category= service?.GetGenrePorId(id.Value);
+            Genres? category= service?.GetGenrePorId(id.Value);
             if (category is null)
             {
                 return NotFound();

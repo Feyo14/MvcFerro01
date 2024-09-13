@@ -1,5 +1,5 @@
 ﻿
-using MvcFerro.Entidades;
+using MvcFerro01.Entidades;
 
 namespace MvcFerro.Datos.Interfaces
 {

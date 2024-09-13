@@ -1,7 +1,7 @@
 ﻿using EFCore3.DATOS.Repositorio;
 using MvcFerro.Datos;
 using MvcFerro.Datos.Interfaces;
-using MvcFerro.Entidades;
+using MvcFerro01.Entidades;
 using MvcFerro.Servicios.Interfaces;
 using System.Linq.Expressions;
 
@@ -16,12 +16,12 @@ namespace EFCore3.Servicios.Servicios
             context=new EFCoresDbContext();
             repo = new RepositorioGenre(context);
         }
-        public IEnumerable<Genre>? GetAll(Expression<Func<Genre, bool>>? filter = null, Func<IQueryable<Genre>, IOrderedQueryable<Genre>>? orderBy = null, string? propertiesNames = null)
+        public IEnumerable<Genres>? GetAll(Expression<Func<Genres, bool>>? filter = null, Func<IQueryable<Genres>, IOrderedQueryable<Genres>>? orderBy = null, string? propertiesNames = null)
         {
             return repo!.GetAll(filter, orderBy, propertiesNames);
         }
 
-        public void Agregar(Genre g)
+        public void Agregar(Genres g)
         {
             try
             {
@@ -42,7 +42,7 @@ namespace EFCore3.Servicios.Servicios
             }
         }
 
-        public void Borrar(Genre Brand)
+        public void Borrar(Genres Brand)
         {
             var GenreInDb = context.Genres.Find(Brand.GenreId);
             if (GenreInDb != null)
@@ -57,12 +57,12 @@ namespace EFCore3.Servicios.Servicios
             }
         }
 
-        public void Editar(Genre pais)
+        public void Editar(Genres pais)
         {
             throw new NotImplementedException();
         }
 
-        public bool existe(Genre b)
+        public bool existe(Genres b)
         {
             try
             {
@@ -75,12 +75,12 @@ namespace EFCore3.Servicios.Servicios
             }
         }
 
-        public Genre? GetGenrePorId(int b)
+        public Genres? GetGenrePorId(int b)
         {
             return repo.GetGenrePorId(b);
         }
 
-        public List<Genre> GetLista()
+        public List<Genres> GetLista()
         {
             
                 return repo.GetLista(); 
@@ -89,7 +89,7 @@ namespace EFCore3.Servicios.Servicios
 
         }
 
-        public Genre? GetPorName(string nombre)
+        public Genres? GetPorName(string nombre)
         {
             return repo.GetPorName(nombre);
         }

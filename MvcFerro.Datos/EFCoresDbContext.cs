@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using MvcFerro.Entidades;
+using MvcFerro01.Entidades;
 
 namespace MvcFerro.Datos;
 
@@ -15,11 +15,11 @@ public partial class EFCoresDbContext : DbContext
     {
     }
 
-    public virtual DbSet<Brand> Brands { get; set; }
+    public virtual DbSet<Brands> Brands { get; set; }
 
     public virtual DbSet<Colors> Colors { get; set; }
 
-    public virtual DbSet<Genre> Genres { get; set; }
+    public virtual DbSet<Genres> Genres { get; set; }
 
     public virtual DbSet<Shoes> Shoes { get; set; }
 
@@ -38,7 +38,7 @@ public partial class EFCoresDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
        
-        modelBuilder.Entity<Brand>(entity =>
+        modelBuilder.Entity<Brands>(entity =>
         {
             entity.ToTable("Brands");
 
@@ -62,7 +62,7 @@ public partial class EFCoresDbContext : DbContext
             entity.Property(e => e.ColorName).HasMaxLength(50);
         });
 
-        modelBuilder.Entity<Genre>(entity =>
+        modelBuilder.Entity<Genres>(entity =>
         {
             entity.ToTable("Genre");
 

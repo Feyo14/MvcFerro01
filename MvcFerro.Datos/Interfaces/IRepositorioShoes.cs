@@ -1,11 +1,12 @@
 ﻿
 
-using MvcFerro.Entidades;
+using EFCoresFerro.Datos.Interfaces;
+using MvcFerro01.Entidades;
 using System.Linq.Expressions;
 
 namespace MvcFerro.Datos.Interfaces
 {
-    public interface IRepositorioShoes
+    public interface IRepositorioShoes: IGenericRepository<Shoes>
     {
         List<Shoes> GetLista();
         void Agregar(Shoes shoe);
@@ -16,9 +17,5 @@ namespace MvcFerro.Datos.Interfaces
         Shoes? GetPorName(string descrip);
         public bool existeShoeSize(int s);
         IEnumerable<Shoes>? GetAll(Expression<Func<Shoes, bool>>? filter, Func<IQueryable<Shoes>, IOrderedQueryable<Shoes>>? orderBy, string? propertiesNames);
-
-
-
-
     }
 }

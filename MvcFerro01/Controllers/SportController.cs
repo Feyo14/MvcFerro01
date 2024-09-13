@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using X.PagedList.Extensions;
 using MvcFerro.Servicios.Interfaces;
-using MvcFerro.Entidades;
+using MvcFerro01.Entidades;
 using MvcFerro01.ViewModels.Sport.SportListVm;
 using MvcFerro01.ViewModels.Sport.SportEditVm;
 

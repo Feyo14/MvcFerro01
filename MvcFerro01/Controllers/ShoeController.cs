@@ -2,28 +2,81 @@
 using Microsoft.AspNetCore.Mvc;
 using X.PagedList.Extensions;
 using MvcFerro.Servicios.Interfaces;
-using MvcFerro.Entidades;
+using MvcFerro01.Entidades;
+using MvcFerro01.ViewModels.Shoe.ShoeListVm;
 using MvcFerro01.ViewModels.Shoe.ShoeEditVm;
-namespace MvcFerro.Controllers
+using Microsoft.AspNetCore.Mvc.Rendering;
+
+
+namespace MvcFerro01.Controllers
 {
     public class ShoeController : Controller
     {
         private readonly IServicioShoes? service;
+        private readonly IServicioBrands? serviceB;
+        private readonly IServicioGenre? serviceG;
+        private readonly IServicioSports? serviceS;
+
         private readonly IMapper? _mapper;
-        public ShoeController(IServicioShoes? ShoeService,
+        public ShoeController(IServicioShoes? BService, IServicioBrands b, IServicioGenre g, IServicioSports s,
             IMapper mapper)
         {
-            service = ShoeService;
+            service = BService;
             _mapper = mapper;
+            serviceB = b;
+            serviceG = g;
+            serviceS = s;
         }
 
-        public IActionResult Index(int? page)
+        public IActionResult Index(int? page, string? searchTerm = null, bool viewAll = false, int pageSize = 10)
         {
+
             int pageNumber = page ?? 1;
-            int pageSize = 10;
-            var shoe = service?.GetLista().ToPagedList(pageNumber, pageSize);
-            ;
-            return View(shoe);
+            ViewBag.currentPageSize = pageSize;
+            IEnumerable<Shoes>? brand;
+            if (!viewAll)
+            {
+                if (!string.IsNullOrEmpty(searchTerm))
+                {
+                    brand = service?
+                        .GetAll(orderBy: o => o.OrderBy(c => c.Descripcion),
+                            filter: c => c.Model.Contains(searchTerm),
+                propertiesNames: "BrandName,GenreName,SportName");
+
+                    //  || c.BrandName!.Contains(searchTerm));
+                    ViewBag.currentSearchTerm = searchTerm;
+                }
+                else
+                {
+                    brand = service?
+                        .GetAll(orderBy: o => o.OrderBy(c => c.Descripcion),
+                                                   filter: c => c.Model.Contains(searchTerm),
+
+                propertiesNames: "BrandName,GenreName,SportName");
+
+                }
+
+            }
+            else
+            {
+                brand = service?
+                    .GetAll(orderBy: o => o.OrderBy(c => c.Descripcion));
+
+            }
+                 var BrandVm = _mapper?.Map<List<ShoeListVm>>(brand)
+                    .ToPagedList(pageNumber, pageSize);
+
+
+               return View(BrandVm);
+
+
+
+
+            //  int pageNumber = page ?? 1;
+            //    int pageSize = 10;
+          //  var marca = service?.GetLista();//.ToPagedList(pageNumber, pageSize);
+          //  ;
+           // return View(marca);
         }
         
         public IActionResult UpSert(int? id)
@@ -32,41 +85,108 @@ namespace MvcFerro.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "Dependencias no están configuradas correctamente");
             }
-        ShoeEditVm Shoe;
+            ShoeEditVm shoevm;
             if (id == null || id == 0)
             {
-                Shoe = new ShoeEditVm();
+                shoevm = new ShoeEditVm();
+                shoevm.Brands = serviceB!
+                    .GetAll(orderBy: q => q.OrderBy(c => c.BrandName))
+                    .Select(c => new SelectListItem
+                    {
+                        Text = c.BrandName,
+                        Value = c.BrandId.ToString()
+                    }).ToList();
+                shoevm.Genre = serviceG!
+                    .GetAll()
+                    .Select(s => new SelectListItem
+                    {
+                        Text = s.GenreName,
+                        Value = s.GenreId.ToString()
+                    }).ToList();
+                shoevm.Sport = serviceS!
+                   .GetAll()
+                   .Select(s => new SelectListItem
+                   {
+                       Text = s.SportName,
+                       Value = s.SportId.ToString()
+                   }).ToList();
             }
             else
             {
                 try
                 {
-                    Shoes? shoe = service.GetShoePorId(id.Value);
-                    if (shoe == null)
+                    Shoes? city = service!.Get(c => c.ShoeId == id.Value,
+                        propertiesNames: "BrandsName,GenreName,SportName");
+                    if (city == null)
                     {
                         return NotFound();
                     }
-                    Shoe = _mapper.Map<ShoeEditVm>(shoe);
-                    return View(Shoe);
+                    shoevm = _mapper!.Map<ShoeEditVm>(city);
+                    shoevm.Brands = serviceB!
+                        .GetAll(orderBy: q => q.OrderBy(c => c.BrandName))
+                        .Select(c => new SelectListItem
+                        {
+                            Text = c.BrandName,
+                            Value = c.BrandId.ToString()
+                        }).ToList();
+                    shoevm.Genre = serviceG!
+                        .GetAll(filter: s => s.GenreId == shoevm.GenreId)
+                        .Select(s => new SelectListItem
+                        {
+                            Text = s.GenreName,
+                            Value = s.GenreId.ToString()
+                        }).ToList();
+                    shoevm.Sport = serviceS!
+                       .GetAll(filter: s => s.SportId == shoevm.SportId)
+                       .Select(s => new SelectListItem
+                       {
+                           Text = s.SportName,
+                           Value = s.SportName.ToString()
+                       }).ToList();
+
+                    return View(shoevm);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     // Log the exception (ex) here as needed
                     return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while retrieving the record.");
                 }
 
             }
-            return View(Shoe);
+            shoevm.Brands = serviceB
+                .GetAll(orderBy: q => q.OrderBy(c => c.BrandName))
+                .Select(c => new SelectListItem
+                {
+                    Text = c.BrandName,
+                    Value = c.BrandId.ToString()
+                }).ToList();
+            shoevm.Genre = serviceG
+                .GetAll(filter: s => s.GenreId ==shoevm.GenreId)
+                .Select(s => new SelectListItem
+                {
+                    Text = s.GenreName,
+                    Value = s.GenreId.ToString()
+                }).ToList();
+            shoevm.Sport = serviceS
+              .GetAll(filter: s => s.SportId == shoevm.SportId)
+              .Select(s => new SelectListItem
+              {
+                  Text = s.SportName,
+                  Value = s.SportId.ToString()
+              }).ToList();
 
+            return View(shoevm);
         }
 
 
         [HttpPost]
-        public IActionResult UpSert(ShoeEditVm s)
+        [ValidateAntiForgeryToken]
+
+        public IActionResult UpSert(ShoeEditVm mar)
         {
             if (!ModelState.IsValid)
             {
-                return View(s);
+                return View(mar);
             }
 
             if (service == null || _mapper == null)
@@ -76,15 +196,15 @@ namespace MvcFerro.Controllers
 
             try
             {
-                Shoes shoe = _mapper.Map<Shoes>(s);
+                Shoes marc = _mapper.Map<Shoes>(mar);
 
-                if (service.existe(shoe))
+                if (service.existe(marc))
                 {
                     ModelState.AddModelError(string.Empty, "Record already exist");
-                    return View(s);
+                    return View(mar);
                 }
 
-                service.Agregar(shoe);
+                service.Agregar(marc);
                 TempData["success"] = "Record successfully added/edited";
                 return RedirectToAction("Index");
             }
@@ -92,19 +212,21 @@ namespace MvcFerro.Controllers
             {
                 // Log the exception (ex) here as needed
                 ModelState.AddModelError(string.Empty, "An error occurred while editing the record.");
-                return View(s);
+                return View(mar);
             }
         }
 
         [HttpDelete]
+        [ValidateAntiForgeryToken]
+
         public IActionResult Delete(int? id)
         {
             if (id is null || id==0)
             {
                 return NotFound();
             }
-            Shoes? s= service?.GetShoePorId(id.Value);
-            if (s is null)
+            Shoes? category= service?.GetShoePorId(id.Value);
+            if (category is null)
             {
                 return NotFound();
             }
@@ -115,11 +237,11 @@ namespace MvcFerro.Controllers
                     return StatusCode(StatusCodes.Status500InternalServerError, "Dependencias no están configuradas correctamente");
                 }
 
-                if (service.existeShoeSize(s.ShoeId))
+               // if (service.estarelacionado(category.MarcaId))
                 {
-                    return Json(new { success = false, message="Related Record... Delete Deny!!" }); ;
+               //     return Json(new { success = false, message="Related Record... Delete Deny!!" }); ;
                 }
-                service.Borrar(s);
+                service.Borrar(category);
                 return Json(new { success = true, message = "Record successfully deleted" });
             }
             catch (Exception)

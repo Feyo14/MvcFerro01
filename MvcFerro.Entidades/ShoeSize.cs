@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
-namespace MvcFerro.Entidades
+namespace MvcFerro01.Entidades
 {
    //[Index(nameof(BrandName), nameof(Brands.BrandName), IsUnique = true)]
 

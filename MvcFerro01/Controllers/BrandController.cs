@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using X.PagedList.Extensions;
 using MvcFerro.Servicios.Interfaces;
-using MvcFerro.Entidades;
+using MvcFerro01.Entidades;
 using MvcFerro01.ViewModels.Brand.BrandListVm;
 using MvcFerro01.ViewModels.Brand.BrandEditVm;
 
@@ -24,7 +24,7 @@ namespace MvcFerro01.Controllers
 
             int pageNumber = page ?? 1;
             ViewBag.currentPageSize = pageSize;
-            IEnumerable<Brand>? brand;
+            IEnumerable<Brands>? brand;
             if (!viewAll)
             {
                 if (!string.IsNullOrEmpty(searchTerm))
@@ -80,7 +80,7 @@ namespace MvcFerro01.Controllers
             {
                 try
                 {
-                    Brand? marc = service.GetBrandsPorId(id.Value);
+                    Brands? marc = service.GetBrandsPorId(id.Value);
                     if (marc == null)
                     {
                         return NotFound();
@@ -117,7 +117,7 @@ namespace MvcFerro01.Controllers
 
             try
             {
-                Brand marc = _mapper.Map<Brand>(mar);
+                Brands marc = _mapper.Map<Brands>(mar);
 
                 if (service.existe(marc))
                 {
@@ -146,7 +146,7 @@ namespace MvcFerro01.Controllers
             {
                 return NotFound();
             }
-            Brand? category= service?.GetBrandsPorId(id.Value);
+            Brands? category= service?.GetBrandsPorId(id.Value);
             if (category is null)
             {
                 return NotFound();

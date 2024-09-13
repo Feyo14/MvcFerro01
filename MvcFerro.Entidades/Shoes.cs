@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MvcFerro.Entidades
+namespace MvcFerro01.Entidades
 {
     //    [Table("Shoes")]
 
@@ -16,9 +16,9 @@ namespace MvcFerro.Entidades
 
         public string Descripcion { get; set; } = null!;
         public decimal Price { get; set; }
-        public Brand? brand { get; set; }
+        public Brands? brand { get; set; }
         public Sports? sport { get; set; }
-        public Genre? genre { get; set; }
+        public Genres? genre { get; set; }
         public bool Active { get; set; }
 
         public ICollection<ShoeSize> shoesize { get; set; } = new List<ShoeSize>();

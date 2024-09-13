@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using MvcFerro01.Entidades;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace MvcFerro01.ViewModels.Brand.BrandListVm
@@ -10,6 +11,7 @@ namespace MvcFerro01.ViewModels.Brand.BrandListVm
 
         public string BrandName { get; set; } = null!;
         public bool Active { get; set; }
+        public ICollection<Shoes> shoes { get; set; } = new List<Shoes>();
 
 
     }

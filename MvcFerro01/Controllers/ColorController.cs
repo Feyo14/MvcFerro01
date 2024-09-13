@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using X.PagedList.Extensions;
 using MvcFerro.Servicios.Interfaces;
-using MvcFerro.Entidades;
+using MvcFerro01.Entidades;
 using MvcFerro01.ViewModels.Color.ColorListVm;
 using MvcFerro01.ViewModels.Color.ColorEditVm;
 

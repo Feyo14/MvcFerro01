@@ -1,6 +1,6 @@
 ﻿using MvcFerro.Datos;
 using MvcFerro.Datos.Interfaces;
-using MvcFerro.Entidades;
+using MvcFerro01.Entidades;
 using MvcFerro.Servicios.Interfaces;
 
 namespace EFCore3.Servicios.Servicios

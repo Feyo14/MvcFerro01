@@ -1,5 +1,5 @@
 ﻿
-using MvcFerro.Entidades;
+using MvcFerro01.Entidades;
 using System.Linq.Expressions;
 
 namespace MvcFerro.Servicios.Interfaces
@@ -17,6 +17,8 @@ namespace MvcFerro.Servicios.Interfaces
         public bool existe(Shoes d);
         Shoes? GetPorName(string descrip);
         public bool existeShoeSize(int s);
-
+        Shoes? Get(Expression<Func<Shoes, bool>> filter,
+            string? propertiesNames = null,
+            bool tracked = true);
     }
 }
