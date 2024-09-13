@@ -13,37 +13,49 @@
 
         </div>
         <div class="form-group row py-2">
+            <label asp-for="Sport"></label>
+            <select asp-for="SportId" asp-items=@Model.Sport class="form-control">
+                <option disabled selected>Select Sport</option>
+            </select>
+            <span asp-validation-for="SportId" class="text-danger"></span>
+
+        </div>
+        <div class="form-group row py-2">
+            <label asp-for="Genre"></label>
+            <select asp-for="GenreId" asp-items=@Model.Genre class="form-control">
+                <option disabled selected>Select Genre</option>
+            </select>
+            <span asp-validation-for="GenreId" class="text-danger"></span>
+        </div>
+        <div class="form-group row py-2">
             <label asp-for="Descripcion"></label>
             <input asp-for="Descripcion" class="form-control" />
             <span asp-validation-for="Descripcion" class="text-danger"></span>
+        </div>
+
+      
+        <div class="form-group row py-2">
+            <label asp-for="Price"></label>
+            <input asp-for="Price" class="form-control" />
+            <span asp-validation-for="Price" class="text-danger"></span>
 
         </div>
-        <label asp-for="Model"></label>
-        <input asp-for="Model" class="form-control" />
-        <span asp-validation-for="Model" class="text-danger"></span>
-    </div>
-      <label asp-for="Price"></label>
-    <input asp-for="Price" class="form-control" />
-    <span asp-validation-for="Price" class="text-danger"></span>
-    </div>
-    <label asp-for="BrandId"></label>
-    <select asp-for="BrandId" asp-items=@Model.Brand class="form-control">
-        <option disabled selected>Select Brand</option>
-    </select>
-    <span asp-validation-for="BrandId" class="text-danger"></span>
-    </div>
-    <label asp-for="GenreId"></label>
-    <select asp-for="GenreId" asp-items=@Model.Genre class="form-control">
-        <option disabled selected>Select Genre</option>
-    </select>
-    <span asp-validation-for="SportId" class="text-danger"></span>
-    </div>
-    <label asp-for="SportId"></label>
-    <select asp-for="SportId" asp-items=@Model.Sport class="form-control">
-        <option disabled selected>Select Sport</option>
-    </select>
-    <span asp-validation-for="SportId" class="text-danger"></span>
-    </div>
+
+     
+        <div class="form-group row py-2">
+            <label asp-for="Brand"></label>
+            <select asp-for="BrandId" asp-items=@Model.Brand class="form-control">
+                <option disabled selected>Select Brand</option>
+            </select>
+            <span asp-validation-for="BrandId" class="text-danger"></span>
+
+        </div>
+       <div class="form-group row py-2">
+        <label asp-for="Active"></label>
+        <input asp-for="Active" class="checkbox" />
+        <span asp-validation-for="Active" class="text-danger"></span>
+
+       </div>
        
         @if (Model.ShoeId == 0)
         {
@@ -66,7 +78,9 @@
         </a>
 
 
-    </div>
+   </div>
+    
+
 </form>
 @section Scripts
 {

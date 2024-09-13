@@ -120,13 +120,17 @@ namespace MvcFerro01.Controllers
             {
                 try
                 {
-                    Shoes? city = service!.Get(c => c.ShoeId == id.Value,
+                    Shoes? s = service!.Get(c => c.ShoeId == id.Value,
                             propertiesNames: "Brand,Genre,Sport");
-                    if (city == null)
+                    if (s == null)
                     {
                         return NotFound();
                     }
-                    shoevm = _mapper!.Map<ShoeEditVm>(city);
+                    s.Brand = null;
+                    s.Genre = null;
+                    s.Sport = null;
+                    shoevm = _mapper!.Map<ShoeEditVm>(s);
+
                     shoevm.Brand = serviceB!
                         .GetAll()
                         .Select(c => new SelectListItem
