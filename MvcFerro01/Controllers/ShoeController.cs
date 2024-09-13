@@ -41,18 +41,23 @@ namespace MvcFerro01.Controllers
                     brand = service?
                         .GetAll(orderBy: o => o.OrderBy(c => c.Descripcion),
                             filter: c => c.Model.Contains(searchTerm),
-                propertiesNames: "BrandName,GenreName,SportName");
+                propertiesNames: "Brand,Genre,Sport");
 
                     //  || c.BrandName!.Contains(searchTerm));
                     ViewBag.currentSearchTerm = searchTerm;
                 }
                 else
                 {
-                    brand = service?
-                        .GetAll(orderBy: o => o.OrderBy(c => c.Descripcion),
-                                                   filter: c => c.Model.Contains(searchTerm),
+                    //    brand = service?
+                    //      .GetAll(orderBy: o => o.OrderBy(c => c.Descripcion),
+                    //                               filter: c => c.Model.Contains(searchTerm),
+                    //
+                    //      propertiesNames: "Brand,Genre,Sport");
 
-                propertiesNames: "BrandName,GenreName,SportName");
+                    brand = service?
+                     .GetAll();                        
+          //  propertiesNames: "Brand,Genre,Sport");
+
 
                 }
 
@@ -89,8 +94,8 @@ namespace MvcFerro01.Controllers
             if (id == null || id == 0)
             {
                 shoevm = new ShoeEditVm();
-                shoevm.Brands = serviceB!
-                    .GetAll(orderBy: q => q.OrderBy(c => c.BrandName))
+                shoevm.Brand = serviceB!
+                    .GetAll()
                     .Select(c => new SelectListItem
                     {
                         Text = c.BrandName,
@@ -116,28 +121,28 @@ namespace MvcFerro01.Controllers
                 try
                 {
                     Shoes? city = service!.Get(c => c.ShoeId == id.Value,
-                        propertiesNames: "BrandsName,GenreName,SportName");
+                            propertiesNames: "Brand,Genre,Sport");
                     if (city == null)
                     {
                         return NotFound();
                     }
                     shoevm = _mapper!.Map<ShoeEditVm>(city);
-                    shoevm.Brands = serviceB!
-                        .GetAll(orderBy: q => q.OrderBy(c => c.BrandName))
+                    shoevm.Brand = serviceB!
+                        .GetAll()
                         .Select(c => new SelectListItem
                         {
                             Text = c.BrandName,
                             Value = c.BrandId.ToString()
                         }).ToList();
                     shoevm.Genre = serviceG!
-                        .GetAll(filter: s => s.GenreId == shoevm.GenreId)
+                        .GetAll()
                         .Select(s => new SelectListItem
                         {
                             Text = s.GenreName,
                             Value = s.GenreId.ToString()
                         }).ToList();
                     shoevm.Sport = serviceS!
-                       .GetAll(filter: s => s.SportId == shoevm.SportId)
+                       .GetAll()
                        .Select(s => new SelectListItem
                        {
                            Text = s.SportName,
@@ -153,7 +158,7 @@ namespace MvcFerro01.Controllers
                 }
 
             }
-            shoevm.Brands = serviceB
+            shoevm.Brand = serviceB
                 .GetAll(orderBy: q => q.OrderBy(c => c.BrandName))
                 .Select(c => new SelectListItem
                 {
@@ -161,14 +166,14 @@ namespace MvcFerro01.Controllers
                     Value = c.BrandId.ToString()
                 }).ToList();
             shoevm.Genre = serviceG
-                .GetAll(filter: s => s.GenreId ==shoevm.GenreId)
+                .GetAll(orderBy: q => q.OrderBy(c => c.GenreName))
                 .Select(s => new SelectListItem
                 {
                     Text = s.GenreName,
                     Value = s.GenreId.ToString()
                 }).ToList();
             shoevm.Sport = serviceS
-              .GetAll(filter: s => s.SportId == shoevm.SportId)
+              .GetAll(orderBy: q => q.OrderBy(c => c.SportName))
               .Select(s => new SelectListItem
               {
                   Text = s.SportName,

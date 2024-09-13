@@ -42,9 +42,9 @@ private readonly EFCoresDbContext _dbContext;
 
                 if (shoe.ShoeId == 0)
                 {
-                    shoe.genre = null;
-                    shoe.sport = null;
-                    shoe.brand = null;
+                    shoe.Genre = null;
+                    shoe.Sport = null;
+                    shoe.Brand = null;
                     repo.Agregar(shoe);
                    _unitOfWork.SaveChanges(); // Guardar cambios para obtener el id de la planta agregada
 
@@ -73,9 +73,9 @@ private readonly EFCoresDbContext _dbContext;
             Shoes gInDb = repo.GetShoePorId(s.ShoeId);
             if (gInDb != null)
             {
-                s.sport = null;
-                s.genre = null;
-                s.brand = null;
+                s.Sport = null;
+                s.Genre = null;
+                s.Brand = null;
                 repo.Borrar(gInDb);
                 _unitOfWork.SaveChanges(); // Guardar cambios para confirmar eliminación 
 

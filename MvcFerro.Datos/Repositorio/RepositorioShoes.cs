@@ -50,19 +50,19 @@ namespace EFCore3.DATOS.Repositorio
             if (sport != null)
             {
                 context.Attach(sport);
-                s.sport = sport;
+                s.Sport = sport;
 
             }
             if (genre != null)
             {
                 context.Attach(genre);
-                s.genre = genre;
+                s.Genre = genre;
 
             }
             if (brand != null)
             {
                 context.Attach(brand);
-                s.brand = brand;
+                s.Brand = brand;
 
             }
           
@@ -103,9 +103,9 @@ namespace EFCore3.DATOS.Repositorio
         public List<Shoes> GetLista()
         {
             return context.Shoes
-                .Include(p => p.brand)
-                .Include(p => p.sport)
-                .Include(p => p.genre)
+                .Include(p => p.Brand)
+                .Include(p => p.Sport)
+                .Include(p => p.Genre)
                       //.OrderBy(p => p.Model)
                           .AsNoTracking()
                 .ToList();

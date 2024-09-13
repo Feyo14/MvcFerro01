@@ -20,10 +20,10 @@ namespace MvcFerro01.ViewModels.Shoe.ShoeListVm
         public string Model { get; set; } = null!;
         //   [StringLength(int.MaxValue)]
         public decimal Price { get; set; }
-      public Brands? brand { get; set; }
+      public Brands? Brand { get; set; }
 
-       public Sports? sport { get; set; }
-      public Genres? genre { get; set; }
+       public Sports? Sport { get; set; }
+      public Genres? Genre { get; set; }
         public ICollection<ShoeSize> shoesize { get; set; } = new List<ShoeSize>();
 
     }

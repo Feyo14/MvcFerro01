@@ -20,7 +20,7 @@ namespace MvcFerro01.ViewModels.Shoe.ShoeEditVm
         public bool Active { get; set; }
         [ValidateNever]
 
-        public IEnumerable<SelectListItem> Brands { get; set; } = null!;
+        public IEnumerable<SelectListItem> Brand { get; set; } = null!;
         [ValidateNever]
 
         //  public Brands? brand { get; set; }

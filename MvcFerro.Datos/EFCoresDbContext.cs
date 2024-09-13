@@ -89,13 +89,13 @@ public partial class EFCoresDbContext : DbContext
 
 
 
-               entity.HasOne(d => d.brand).WithMany(p => p.shoes)
+               entity.HasOne(d => d.Brand).WithMany(p => p.shoes)
                 .HasForeignKey(d => d.BrandId)
                 .HasConstraintName("FK_Shoes_BrandId");
-              entity.HasOne(d => d.genre).WithMany(p => p.shoes)
+              entity.HasOne(d => d.Genre).WithMany(p => p.shoes)
               .HasForeignKey(d => d.GenreId)
                .HasConstraintName("FK_Shoes_GenreId");
-               entity.HasOne(d => d.sport).WithMany(p => p.shoes)
+               entity.HasOne(d => d.Sport).WithMany(p => p.shoes)
                .HasForeignKey(d => d.SportId)
                 .HasConstraintName("FK_Shoes_SportId");
 
