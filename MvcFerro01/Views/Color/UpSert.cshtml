@@ -1,26 +1,31 @@
-﻿@using MvcFerro01.ViewModels.Genre.GenreEditVm
-@model GenreEditVm
+﻿@using MvcFerro01.ViewModels.Color.ColorEditVm
+@model ColorEditVm
 @{
-    ViewData["Title"] = "New/Edit Genre";
+    ViewData["Title"] = "New/Edit Color";
 }
 <form method="post" asp-action="UpSert" class="w-75">
-    <input type="hidden" asp-for="GenreId" />
+    <input type="hidden" asp-for="ColorId" />
 
     <div class="border p-3 bg-white">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group row">
-            <h2 class="text-info pl-3">@(Model.GenreId == 0 ? "Add Marca" : "Edit Marca")</h2>
+            <h2 class="text-info pl-3">@(Model.ColorId==0?"Add Marca":"Edit Color")</h2>
 
         </div>
         <div class="form-group row py-2">
-            <label asp-for="GenreName"></label>
-            <input asp-for="GenreName" class="form-control" />
-            <span asp-validation-for="GenreName" class="text-danger"></span>
+            <label asp-for="ColorName"></label>
+            <input asp-for="ColorName" class="form-control" />
+            <span asp-validation-for="ColorName" class="text-danger"></span>
 
         </div>
-      
+        <div class="form-group row py-2">
+            <label asp-for="Active"></label>
+            <input asp-for="Active" class="checkbox" />
+            <span asp-validation-for="Active" class="text-danger"></span>
+
+        </div>
        
-        @if (Model.GenreId == 0)
+        @if (Model.ColorId == 0)
         {
             <button type="submit" class="btn btn-primary">
                 <i class="bi bi-floppy2-fill"></i>

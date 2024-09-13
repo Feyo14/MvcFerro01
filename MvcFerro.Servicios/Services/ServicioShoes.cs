@@ -4,6 +4,7 @@ using MvcFerro.Datos;
 using MvcFerro.Datos.Interfaces;
 using MvcFerro.Entidades;
 using MvcFerro.Servicios.Interfaces;
+using System.Linq.Expressions;
 
 namespace EFCore3.Servicios.Servicios
 {
@@ -121,7 +122,13 @@ private readonly EFCoresDbContext _dbContext;
 
         public Shoes? GetShoePorId(int id)
         {
-          return   repo.GetShoePorId(id);        }
+          return   repo.GetShoePorId(id);    
+        }
+        public IEnumerable<Shoes>? GetAll(Expression<Func<Shoes, bool>>? filter = null, Func<IQueryable<Shoes>, IOrderedQueryable<Shoes>>? orderBy = null, string? propertiesNames = null)
+        {
+            return repo!.GetAll(filter, orderBy, propertiesNames);
+        }
+
     }
 
   

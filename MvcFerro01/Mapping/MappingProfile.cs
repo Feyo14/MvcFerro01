@@ -2,6 +2,8 @@
 using MvcFerro.Entidades;
 using MvcFerro01.ViewModels.Brand.BrandEditVm;
 using MvcFerro01.ViewModels.Brand.BrandListVm;
+using MvcFerro01.ViewModels.Color.ColorEditVm;
+using MvcFerro01.ViewModels.Color.ColorListVm;
 using MvcFerro01.ViewModels.Genre.GenreEditVm;
 using MvcFerro01.ViewModels.Genre.GenreListVm;
 using MvcFerro01.ViewModels.Shoe.ShoeEditVm;
@@ -18,7 +20,15 @@ namespace MvcFerro01.Mapping
             LoadShoeMapping();
             LoadGenreMapping();
             LoadSportMapping();
+            LoadColorMapping();
 
+        }
+
+        private void LoadColorMapping()
+        {
+            CreateMap<Colors, ColorListVm>();
+
+            CreateMap<Colors, ColorEditVm>().ReverseMap();
         }
 
         private void LoadSportMapping()

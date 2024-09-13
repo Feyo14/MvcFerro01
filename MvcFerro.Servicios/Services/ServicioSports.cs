@@ -3,6 +3,7 @@ using MvcFerro.Datos;
 using MvcFerro.Datos.Interfaces;
 using MvcFerro.Entidades;
 using MvcFerro.Servicios.Interfaces;
+using System.Linq.Expressions;
 
 namespace EFCore3.Servicios.Servicios
 {
@@ -86,6 +87,10 @@ namespace EFCore3.Servicios.Servicios
         public Sports? GetSportsPorId(int b)
         {
             return repo.GetSportsPorId(b);
+        }
+        public IEnumerable<Sports>? GetAll(Expression<Func<Sports, bool>>? filter = null, Func<IQueryable<Sports>, IOrderedQueryable<Sports>>? orderBy = null, string? propertiesNames = null)
+        {
+            return repo!.GetAll(filter, orderBy, propertiesNames);
         }
     }
 

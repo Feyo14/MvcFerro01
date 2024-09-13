@@ -3,6 +3,7 @@ using MvcFerro.Datos;
 using MvcFerro.Datos.Interfaces;
 using MvcFerro.Entidades;
 using MvcFerro.Servicios.Interfaces;
+using System.Linq.Expressions;
 
 namespace EFCore3.Servicios.Servicios
 {
@@ -84,8 +85,12 @@ namespace EFCore3.Servicios.Servicios
 
 
         }
+        public IEnumerable<Colors>? GetAll(Expression<Func<Colors, bool>>? filter = null, Func<IQueryable<Colors>, IOrderedQueryable<Colors>>? orderBy = null, string? propertiesNames = null)
+        {
+            return repo!.GetAll(filter, orderBy, propertiesNames);
+        }
 
-      
+
     }
 
      //   public Paise GetPaisporId(int paisId)

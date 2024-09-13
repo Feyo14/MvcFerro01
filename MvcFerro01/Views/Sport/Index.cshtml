@@ -66,7 +66,6 @@
             <tr>
                 <th style="width:50%">Sport</th>
                 <th style="width:35%">Active</th>
-
                 <th style="width:15%">Actions</th>
 
             </tr>
@@ -81,7 +80,7 @@
                             @item.SportName
 
                         </td>
-                        <td>
+                       
                             @if (item.Active == true)
                             {
                                 <td>
@@ -94,7 +93,7 @@
                                 </td>
                             }
 
-                        </td>
+                        
                         <td>
                             <a class="btn btn-warning" asp-controller="Sport" asp-action="UpSert" asp-route-id="@item.SportId">
                                 <i class="bi bi-pencil-square"></i>&nbsp;
