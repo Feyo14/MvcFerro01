@@ -86,15 +86,13 @@
                         <td>
 
                          
-                            @item.BrandId
-                     
+                            @item.Brand.BrandName                   
                         </td>
-                          <td>     
-                              
-                            @item.GenreId                     
+                          <td>                                   
+                            @item.Genre.GenreName                 
                         </td>
                           <td>
-                            @item.SportId
+                            @item.Sport.SportName
                         </td>
                           <td>                      
                             @item.Descripcion
@@ -105,9 +103,7 @@
                           <td>              
                             @item.Price
                         </td>
-                        <td>
-                      
-                        </td>
+                 
                         <td>
                             <a class="btn btn-warning" asp-controller="Shoe" asp-action="UpSert" asp-route-id="@item.ShoeId">
                                 <i class="bi bi-pencil-square"></i>&nbsp;

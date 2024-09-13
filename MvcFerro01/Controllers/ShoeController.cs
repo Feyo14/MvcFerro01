@@ -55,7 +55,7 @@ namespace MvcFerro01.Controllers
                     //      propertiesNames: "Brand,Genre,Sport");
 
                     brand = service?
-                     .GetAll();                        
+                     .GetAll(propertiesNames: "Brand,Genre,Sport");                        
           //  propertiesNames: "Brand,Genre,Sport");
 
 
