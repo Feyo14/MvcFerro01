@@ -38,6 +38,7 @@ namespace EFCore3.DATOS.Repositorio
               .FirstOrDefault(t => t.GenreId == shoe.GenreId);
             var brand = context.Brands
             .FirstOrDefault(t => t.BrandId == shoe.BrandId);
+            s.Active = shoe.Active;
             /*
         
             */

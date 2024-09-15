@@ -33,12 +33,12 @@ namespace MvcFerro01.Controllers
 
             int pageNumber = page ?? 1;
             ViewBag.currentPageSize = pageSize;
-            IEnumerable<Shoes>? brand;
+            IEnumerable<Shoes>? shoe;
             if (!viewAll)
             {
                 if (!string.IsNullOrEmpty(searchTerm))
                 {
-                    brand = service?
+                    shoe = service?
                         .GetAll(orderBy: o => o.OrderBy(c => c.Descripcion),
                             filter: c => c.Model.Contains(searchTerm),
                 propertiesNames: "Brand,Genre,Sport");
@@ -54,7 +54,7 @@ namespace MvcFerro01.Controllers
                     //
                     //      propertiesNames: "Brand,Genre,Sport");
 
-                    brand = service?
+                    shoe = service?
                      .GetAll(propertiesNames: "Brand,Genre,Sport");                        
           //  propertiesNames: "Brand,Genre,Sport");
 
@@ -64,11 +64,11 @@ namespace MvcFerro01.Controllers
             }
             else
             {
-                brand = service?
-                    .GetAll(orderBy: o => o.OrderBy(c => c.Descripcion));
+                shoe = service?
+                    .GetAll(orderBy: o => o.OrderBy(c => c.Descripcion), propertiesNames: "Brand,Genre,Sport");
 
             }
-                 var BrandVm = _mapper?.Map<List<ShoeListVm>>(brand)
+                 var BrandVm = _mapper?.Map<List<ShoeListVm>>(shoe)
                     .ToPagedList(pageNumber, pageSize);
 
 
@@ -102,14 +102,14 @@ namespace MvcFerro01.Controllers
                         Value = c.BrandId.ToString()
                     }).ToList();
                 shoevm.Genre = serviceG!
-                    .GetAll(orderBy: q => q.OrderBy(c => c.GenreName))
+                    .GetAll()
                     .Select(s => new SelectListItem
                     {
                         Text = s.GenreName,
                         Value = s.GenreId.ToString()
                     }).ToList();
                 shoevm.Sport = serviceS!
-                   .GetAll(orderBy: q => q.OrderBy(c => c.SportName))
+                   .GetAll()
                    .Select(s => new SelectListItem
                    {
                        Text = s.SportName,
@@ -127,12 +127,12 @@ namespace MvcFerro01.Controllers
                         return NotFound();
                     }
                     s.Brand = null;
-                    s.Genre = null;
+                   s.Genre = null;
                     s.Sport = null;
                     shoevm = _mapper!.Map<ShoeEditVm>(s);
 
                     shoevm.Brand = serviceB!
-                        .GetAll()
+                        .GetAll(orderBy: q => q.OrderBy(c => c.BrandName))
                         .Select(c => new SelectListItem
                         {
                             Text = c.BrandName,
@@ -150,7 +150,7 @@ namespace MvcFerro01.Controllers
                        .Select(s => new SelectListItem
                        {
                            Text = s.SportName,
-                           Value = s.SportName.ToString()
+                           Value = s.SportId.ToString()
                        }).ToList();
 
                     return View(shoevm);
@@ -191,11 +191,33 @@ namespace MvcFerro01.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public IActionResult UpSert(ShoeEditVm mar)
+        public IActionResult UpSert(ShoeEditVm shoVm)
         {
             if (!ModelState.IsValid)
             {
-                return View(mar);
+                shoVm.Brand = serviceB!
+                                   .GetAll(orderBy: q => q.OrderBy(c => c.BrandName))
+                                   .Select(c => new SelectListItem
+                                   {
+                                       Text = c.BrandName,
+                                       Value = c.BrandId.ToString()
+                                   }).ToList();
+                shoVm.Genre = serviceG!
+                                  .GetAll(orderBy: q => q.OrderBy(c => c.GenreName))
+                                  .Select(c => new SelectListItem
+                                  {
+                                      Text = c.GenreName,
+                                      Value = c.GenreId.ToString()
+                                  }).ToList();
+                shoVm.Sport = serviceS!
+                                      .GetAll(orderBy: q => q.OrderBy(c => c.SportName))
+                                      .Select(c => new SelectListItem
+                                      {
+                                          Text = c.SportName,
+                                          Value = c.SportId.ToString()
+                                      }).ToList();
+
+                return View(shoVm);
             }
 
             if (service == null || _mapper == null)
@@ -205,23 +227,66 @@ namespace MvcFerro01.Controllers
 
             try
             {
-                Shoes marc = _mapper.Map<Shoes>(mar);
+                Shoes SVm = _mapper.Map<Shoes>(shoVm);
 
-                if (service.existe(marc))
+                if (service.existe(SVm))
                 {
-                    ModelState.AddModelError(string.Empty, "Record already exist");
-                    return View(mar);
+                    shoVm.Brand = serviceB!
+                                 .GetAll(orderBy: q => q.OrderBy(c => c.BrandName))
+                                 .Select(c => new SelectListItem
+                                 {
+                                     Text = c.BrandName,
+                                     Value = c.BrandId.ToString()
+                                 }).ToList();
+                    shoVm.Genre = serviceG!
+                                      .GetAll(orderBy: q => q.OrderBy(c => c.GenreName))
+                                      .Select(c => new SelectListItem
+                                      {
+                                          Text = c.GenreName,
+                                          Value = c.GenreId.ToString()
+                                      }).ToList();
+                    shoVm.Sport = serviceS!
+                                          .GetAll(orderBy: q => q.OrderBy(c => c.SportName))
+                                          .Select(c => new SelectListItem
+                                          {
+                                              Text = c.SportName,
+                                              Value = c.SportId.ToString()
+                                          }).ToList();
+
+                    return View(shoVm);
                 }
 
-                service.Agregar(marc);
+                service.Agregar(SVm);
                 TempData["success"] = "Record successfully added/edited";
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
+                shoVm.Brand = serviceB!
+                              .GetAll(orderBy: q => q.OrderBy(c => c.BrandName))
+                              .Select(c => new SelectListItem
+                              {
+                                  Text = c.BrandName,
+                                  Value = c.BrandId.ToString()
+                              }).ToList();
+                shoVm.Genre = serviceG!
+                                  .GetAll(orderBy: q => q.OrderBy(c => c.GenreName))
+                                  .Select(c => new SelectListItem
+                                  {
+                                      Text = c.GenreName,
+                                      Value = c.GenreId.ToString()
+                                  }).ToList();
+                shoVm.Sport = serviceS!
+                                      .GetAll(orderBy: q => q.OrderBy(c => c.SportName))
+                                      .Select(c => new SelectListItem
+                                      {
+                                          Text = c.SportName,
+                                          Value = c.SportId.ToString()
+                                      }).ToList();
+
                 // Log the exception (ex) here as needed
                 ModelState.AddModelError(string.Empty, "An error occurred while editing the record.");
-                return View(mar);
+                return View(shoVm);
             }
         }
 
