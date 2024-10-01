@@ -12,9 +12,10 @@ namespace MvcFerro01.Entidades
         public int BrandId { get; set; }
         [StringLength(50)]
         public string BrandName { get; set; } = null!;
-        public bool Active { get; set; }
+        public bool Active { get; set; }//
+                public string? ImageUrl { get; set; }
 
-        public ICollection<Shoes> shoes { get; set; } = new List<Shoes>();
+      //  public ICollection<Shoes> shoes { get; set; } = new List<Shoes>();
 
 
 

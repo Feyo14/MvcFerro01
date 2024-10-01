@@ -5,17 +5,22 @@ using MvcFerro.Servicios.Interfaces;
 using MvcFerro01.Entidades;
 using MvcFerro01.ViewModels.Brand.BrandListVm;
 using MvcFerro01.ViewModels.Brand.BrandEditVm;
+using MvcFerro01.ViewModels.Brand.BrandDetailsVm;
+using MvcFerro01.ViewModels.Shoe.ShoeListVm;
 
 namespace MvcFerro01.Controllers
 {
     public class BrandController : Controller
     {
         private readonly IServicioBrands? service;
+        private readonly IServicioShoes? serviceshoes;
+
         private readonly IMapper? _mapper;
-        public BrandController(IServicioBrands? BService,
+        public BrandController(IServicioBrands? BService, IServicioShoes s,
             IMapper mapper)
         {
             service = BService;
+            serviceshoes = s;
             _mapper = mapper;
         }
 
@@ -171,6 +176,28 @@ namespace MvcFerro01.Controllers
                 return Json(new { success = false, message = "Couldn't delete record!!! " }); ;
 
             }
+        }
+        public IActionResult Details(int? id, int? page)
+        {
+
+            if (id is null || id == 0)
+            {
+                return NotFound();
+            }
+            Brands? brand = service?.GetBrandsPorId(id.Value);
+            if (brand is null)
+            {
+                return NotFound();
+            }
+            var currentPage = page ?? 1;
+            int pageSize = 10;
+            BrandDetailsVm  brandVm = _mapper!.Map<BrandDetailsVm>(brand);
+            var S = serviceshoes!.GetAll(
+                
+                filter: p => p.BrandId == brandVm.BrandId,
+                propertiesNames:"Brand");
+            brandVm.Shoes = _mapper!.Map<List<ShoeListVm>>(S).ToPagedList(currentPage, pageSize);
+            return View(brandVm);
         }
 
     }

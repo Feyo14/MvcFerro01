@@ -1,9 +1,10 @@
-﻿using MvcFerro01.Entidades;
+﻿using EFCoresFerro.Datos.Interfaces;
+using MvcFerro01.Entidades;
 using System.Linq.Expressions;
 
 namespace MvcFerro.Datos.Interfaces
 {
-    public interface IRepositorioBrands
+    public interface IRepositorioBrands : IGenericRepository<Brands>
     {
         List<Brands> GetLista();
         void Agregar(Brands brands);

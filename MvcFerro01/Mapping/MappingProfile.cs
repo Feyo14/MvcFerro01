@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MvcFerro01.Entidades;
+using MvcFerro01.ViewModels.Brand.BrandDetailsVm;
 using MvcFerro01.ViewModels.Brand.BrandEditVm;
 using MvcFerro01.ViewModels.Brand.BrandListVm;
 using MvcFerro01.ViewModels.Color.ColorEditVm;
@@ -57,6 +58,7 @@ namespace MvcFerro01.Mapping
         private void LoadBrandMapping()
         {
             CreateMap<Brands, BrandListVm>();
+            CreateMap<Brands, BrandDetailsVm>();
 
             CreateMap<Brands, BrandEditVm>().ReverseMap();
         }

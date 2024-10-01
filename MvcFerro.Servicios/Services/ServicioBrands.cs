@@ -5,6 +5,7 @@ using MvcFerro.Datos.Interfaces;
 using MvcFerro01.Entidades;
 using MvcFerro.Servicios.Interfaces;
 using System.Linq.Expressions;
+using NuGet.Protocol.Core.Types;
 
 namespace EFCore3.Servicios.Servicios
 {
@@ -94,6 +95,11 @@ namespace EFCore3.Servicios.Servicios
         public IEnumerable<Brands>? GetAll(Expression<Func<Brands, bool>>? filter = null, Func<IQueryable<Brands>, IOrderedQueryable<Brands>>? orderBy = null, string? propertiesNames = null)
         {
             return repo!.GetAll(filter, orderBy, propertiesNames);
+        }
+
+        public Brands? Get(Expression<Func<Brands, bool>>? filter = null, string? propertiesNames = null, bool tracked = true)
+        {
+            return repo!.Get(filter, propertiesNames, tracked);
         }
     }
 

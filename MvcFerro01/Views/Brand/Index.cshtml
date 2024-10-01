@@ -10,7 +10,7 @@
     ViewData["Title"] = "Brand List";
 }
 @Html.AntiForgeryToken();
-<div class="container">
+<div class="container w-75">
     <div class="row mb-3">
         <div class="col-6">
             <h3>Marca List</h3>
@@ -61,13 +61,12 @@
             </div>
         </div>
     </form>
-    <table class="table table-bordered table-hover">
+    <table class="table table-bordered table-hover w-75">
         <thead>
             <tr>
-                <th style="width:50%">Marca</th>
-                <th style="width:35%">Active</th>
-
-                <th style="width:15%">Actions</th>
+                <th style="width:30%">Marca</th>
+                <th style="width:25%">Active</th>
+                <th style="width:30%">Actions</th>
 
             </tr>
         </thead>
@@ -85,13 +84,13 @@
                             @if (item.Active == true)
                             {
                                 <td>
-                             Activo
-                             </td>
+                                <span class="badge bg-primary">Yes</span>
+                            </td>
                             }
                             else
                             {<td>
-                                No Activo
-                                </td>
+                                <span class="badge bg-danger">No</span>
+                            </td>
                             }
 
                       
@@ -104,6 +103,10 @@
                                 <i class="bi bi-trash-fill"></i>
                                 Delete
                             </a>
+                            <a class="btn btn-info" asp-controller="Brand" asp-action="Details" asp-route-id="@item.BrandId">
+                                <i class="bi bi-card-list"></i>&nbsp;
+                                Details
+                            </a>
                         </td>
                     </tr>
                 }
@@ -111,7 +114,7 @@
             else
             {
                 <tr>
-                    <td colspan="2" class="text-center">
+                    <td colspan="3" class="text-center">
                         F?uck!!! No marcas added yet!
 
                     </td>

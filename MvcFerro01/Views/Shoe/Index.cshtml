@@ -102,19 +102,17 @@
                           <td>              
                             @item.Price
                         </td>
-                              <td>              
-                            @item.Active
-                        </td>
+
                         @if (item.Active == true)
                         {
                             <td>
-                                Activo
+                                <span class="badge bg-primary">Yes</span>
                             </td>
                         }
                         else
                         {
                             <td>
-                               Suspendido
+                                <span class="badge bg-danger">No</span>
                             </td>
                         }
                         <td>

@@ -1,0 +1,105 @@
+﻿@model BrandDetailsVm
+@using MvcFerro01.ViewModels.Brand.BrandDetailsVm
+@using X.PagedList
+@using X.Web.PagedList
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@Html.AntiForgeryToken();
+
+<div>
+    <h4>Brand's Details</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            <label asp-for="BrandName"></label>
+        </dt>
+        <dd class="col-sm-4">
+            <input asp-for="BrandName" class="form-control form-control-sm" readonly />
+        </dd>
+    </dl>
+</div>
+<div>
+    <a class="btn btn-warning btn-sm" asp-controller="Brands" asp-action="UpSert" asp-route-id="@Model.BrandId">
+        <i class="bi bi-pencil-square"></i>&nbsp;
+        Edit
+    </a>
+    <a asp-action="Index" class="btn btn-success btn-sm">
+        <i class="bi bi-backspace"></i>&nbsp;
+        Back to List
+    </a>
+</div>
+<table class="table table-bordered table-hover mt-3">
+    <thead>
+        <tr>
+            <th style="width:20%">Shoe description</th>
+            <th style="width:10%">brand</th>
+            <th style="width:20%">precio</th>
+            <th style="width:20%">suspended?</th>
+
+            <th style="width:20%">Actions</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Shoes!.Any())
+        {
+            foreach (var item in Model.Shoes!)
+            {
+                <tr id="@item.ShoeId">
+                    <td>
+                        @item.Descripcion
+
+                    </td>
+                    <td>
+                        @item.Brand
+                    </td>
+                   
+                    <td style="text-align:right">
+                        @item.Price.ToString("C2")
+                    </td>
+                
+                    <td>
+                        <input type="checkbox" asp-for="@item.Active" disabled />
+
+                    </td>
+
+                    <td>
+                        <a class="btn btn-warning" asp-controller="Shoes" asp-action="UpSert" asp-route-id="@item.ShoeId">
+                            <i class="bi bi-pencil-square"></i>&nbsp;
+                            Edit
+                        </a>
+                        <a onclick="Delete('/Products/Delete/@item.ShoeId',@item.ShoeId)" class="btn btn-danger">
+                            <i class="bi bi-trash-fill"></i>
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="7" class="text-center">
+                    F?uck!!! No products have been added yet!
+
+                </td>
+            </tr>
+
+        }
+    </tbody>
+</table>
+<div class="d-flex">
+    @Html.PagedListPager(Model.Shoes, page => Url.Action("Details",
+    new { page ,
+    }), new PagedListRenderOptions
+{
+    UlElementClasses = new[] { "pagination" },
+    LiElementClasses = new[] { "page-item" },
+    PageClasses = new[] { "page-link" },
+    DisplayLinkToIndividualPages = true,
+    DisplayPageCountAndCurrentLocation = false,
+    MaximumPageNumbersToDisplay = 10
+})
+</div>

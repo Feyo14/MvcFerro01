@@ -9,6 +9,12 @@ namespace MvcFerro.Servicios.Interfaces
           Func<IQueryable<Brands>, IOrderedQueryable<Brands>>? orderBy = null,
           string? propertiesNames = null);
         List<Brands> GetLista();
+
+        Brands? Get(Expression<Func<Brands, bool>>? filter = null,
+          string? propertiesNames = null,
+          bool tracked = true);
+
+
         void Agregar(Brands brands);
         void Borrar(Brands brands);
         void Editar(Brands brands);
