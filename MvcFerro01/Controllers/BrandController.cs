@@ -7,6 +7,7 @@ using MvcFerro01.ViewModels.Brand.BrandListVm;
 using MvcFerro01.ViewModels.Brand.BrandEditVm;
 using MvcFerro01.ViewModels.Brand.BrandDetailsVm;
 using MvcFerro01.ViewModels.Shoe.ShoeListVm;
+using MvcFerro01.ViewModels.Brand.BrandDetail;
 
 namespace MvcFerro01.Controllers
 {
@@ -185,13 +186,19 @@ namespace MvcFerro01.Controllers
                 return NotFound();
             }
             Brands? brand = service?.GetBrandsPorId(id.Value);
+            BrandDetailsVm marcavm= new BrandDetailsVm();
+
+            marcavm.BrandId = brand.BrandId;
+            marcavm.BrandName = brand.BrandName;
+            marcavm.Active = brand.Active;
+
             if (brand is null)
             {
                 return NotFound();
             }
             var currentPage = page ?? 1;
             int pageSize = 10;
-            BrandDetailsVm  brandVm = _mapper!.Map<BrandDetailsVm>(brand);
+            BrandDetailsVm  brandVm = _mapper!.Map<BrandDetailsVm>(marcavm);
             var S = serviceshoes!.GetAll(
                 
                 filter: p => p.BrandId == brandVm.BrandId,

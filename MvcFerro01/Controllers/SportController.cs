@@ -5,16 +5,23 @@ using MvcFerro.Servicios.Interfaces;
 using MvcFerro01.Entidades;
 using MvcFerro01.ViewModels.Sport.SportListVm;
 using MvcFerro01.ViewModels.Sport.SportEditVm;
+using EFCore3.Servicios.Servicios;
+using MvcFerro01.ViewModels.Brand.BrandDetailsVm;
+using MvcFerro01.ViewModels.Shoe.ShoeListVm;
+using MvcFerro01.ViewModels.Sport.SportDetailsVm;
 
 namespace MvcFerro01.Controllers
 {
     public class SportController : Controller
     {
         private readonly IServicioSports? service;
+        private readonly IServicioShoes? serviceshoe;
+
         private readonly IMapper? _mapper;
-        public SportController(IServicioSports? BService,
+        public SportController(IServicioSports? BService,IServicioShoes s,
             IMapper mapper)
         {
+            serviceshoe = s;
             service = BService;
             _mapper = mapper;
         }
@@ -171,6 +178,35 @@ namespace MvcFerro01.Controllers
                 return Json(new { success = false, message = "Couldn't delete record!!! " }); ;
 
             }
+        }
+
+        public IActionResult Details(int? id, int? page)
+        {
+
+            if (id is null || id == 0)
+            {
+                return NotFound();
+            }
+            Sports? sport = service?.GetSportsPorId(id.Value);
+            SportDetailsVm sportv = new SportDetailsVm();
+
+            sportv.SportId = sport.SportId;
+            sportv.SportName = sport.SportName;
+            sportv.Active = sport.Active;
+
+            if (sport is null)
+            {
+                return NotFound();
+            }
+            var currentPage = page ?? 1;
+            int pageSize = 10;
+            SportDetailsVm SportVm = _mapper!.Map<SportDetailsVm>(sportv);
+            var S = serviceshoe!.GetAll(
+
+                filter: p => p.SportId == SportVm.SportId,
+                propertiesNames: "Sport");
+            SportVm.Shoes = _mapper!.Map<List<ShoeListVm>>(S).ToPagedList(currentPage, pageSize);
+            return View(SportVm);
         }
 
     }

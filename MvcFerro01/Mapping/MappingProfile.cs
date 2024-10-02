@@ -9,6 +9,7 @@ using MvcFerro01.ViewModels.Genre.GenreEditVm;
 using MvcFerro01.ViewModels.Genre.GenreListVm;
 using MvcFerro01.ViewModels.Shoe.ShoeEditVm;
 using MvcFerro01.ViewModels.Shoe.ShoeListVm;
+using MvcFerro01.ViewModels.Sport.SportDetailsVm;
 using MvcFerro01.ViewModels.Sport.SportEditVm;
 using MvcFerro01.ViewModels.Sport.SportListVm;
 
@@ -36,6 +37,7 @@ namespace MvcFerro01.Mapping
         private void LoadSportMapping()
         {
             CreateMap<Sports, SportListVm>();
+            CreateMap<Sports, SportDetailsVm>();
 
             CreateMap<Sports, SportEditVm>().ReverseMap();
         }
