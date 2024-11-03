@@ -86,7 +86,7 @@ namespace MvcFerro01.Controllers
            // return View(marca);
         }
         
-        public IActionResult UpSert1(int? id)
+        public IActionResult UpSert(int? id)
         {
             if (service == null || _mapper == null)
             {
@@ -130,7 +130,7 @@ namespace MvcFerro01.Controllers
                         .Select(c => new SelectListItem
                         {
                             Text = c.Descripcion,
-                            Value = c.BrandId.ToString()
+                            Value = c.ShoeId.ToString()
                         }).ToList();
                     shoevm.Size = serviceS!
                         .GetAll()
@@ -171,7 +171,7 @@ namespace MvcFerro01.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public IActionResult UpSert1(ShoeSizeEditVm shoVm)
+        public IActionResult UpSert(ShoeSizeEditVm shoVm)
         {
             if (!ModelState.IsValid)
             {
