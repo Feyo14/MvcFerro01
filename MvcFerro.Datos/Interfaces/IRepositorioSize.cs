@@ -1,10 +1,12 @@
 ﻿
 
+using EFCoresFerro.Datos.Interfaces;
 using MvcFerro01.Entidades;
+using System.Linq.Expressions;
 
 namespace MvcFerro.Datos.Interfaces
 {
-    public interface IRepositorioSize
+    public interface IRepositorioSize : IGenericRepository<Size>
     {
         List<Size> GetLista();
         Size? GetPorName(decimal descrip);
@@ -17,6 +19,7 @@ namespace MvcFerro.Datos.Interfaces
                 Genre? GetGenrePorId(int genreid);
                 Genre? GetPorName(string nombre);
                 */
+        IEnumerable<Size>? GetAll(Expression<Func<Size, bool>>? filter, Func<IQueryable<Size>, IOrderedQueryable<Size>>? orderBy, string? propertiesNames);
 
     }
 }

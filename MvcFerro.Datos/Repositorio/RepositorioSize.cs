@@ -1,18 +1,19 @@
-﻿using MvcFerro.Datos;
+﻿using EFCoresFerro.Datos.Repositorio;
+using MvcFerro.Datos;
 using MvcFerro.Datos.Interfaces;
 using MvcFerro01.Entidades;
 
 namespace EFCore3.DATOS.Repositorio
 {
-    public class RepositorioSize : IRepositorioSize
+    public class RepositorioSize : GenericRepository<Size>, IRepositorioSize
     {
         private readonly EFCoresDbContext context;
 
-        public RepositorioSize(EFCoresDbContext context)
+        public RepositorioSize(EFCoresDbContext db) : base(db)
         {
-            this.context = context;
+            context = db ?? throw new ArgumentNullException(nameof(db));
         }
-       
+
         public List<Size> GetLista()
         {
             return context.Size

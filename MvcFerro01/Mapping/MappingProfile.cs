@@ -9,6 +9,8 @@ using MvcFerro01.ViewModels.Genre.GenreEditVm;
 using MvcFerro01.ViewModels.Genre.GenreListVm;
 using MvcFerro01.ViewModels.Shoe.ShoeEditVm;
 using MvcFerro01.ViewModels.Shoe.ShoeListVm;
+using MvcFerro01.ViewModels.ShoeSize.ShoeSizeEditVm;
+using MvcFerro01.ViewModels.ShoeSize.ShoeSizeListVm;
 using MvcFerro01.ViewModels.Sport.SportDetailsVm;
 using MvcFerro01.ViewModels.Sport.SportEditVm;
 using MvcFerro01.ViewModels.Sport.SportListVm;
@@ -24,7 +26,15 @@ namespace MvcFerro01.Mapping
             LoadGenreMapping();
             LoadSportMapping();
             LoadColorMapping();
+            LoadShoeSizeMapping();
 
+        }
+
+        private void LoadShoeSizeMapping()
+        {
+            CreateMap<ShoeSize, ShoeSizeListVm>();
+
+            CreateMap<ShoeSize, ShoeSizeEditVm>().ReverseMap();
         }
 
         private void LoadColorMapping()

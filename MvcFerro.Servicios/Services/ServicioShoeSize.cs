@@ -2,6 +2,7 @@
 using MvcFerro.Datos.Interfaces;
 using MvcFerro01.Entidades;
 using MvcFerro.Servicios.Interfaces;
+using System.Linq.Expressions;
 
 namespace EFCore3.Servicios.Servicios
 {
@@ -87,6 +88,21 @@ private readonly EFCoresDbContext _dbContext;
         public bool existe(ShoeSize d)
         {
             return repo.existe(d);
+        }
+
+        public ShoeSize? Get(Expression<Func<ShoeSize, bool>> filter, string? propertiesNames = null, bool tracked = true)
+        {
+            if (repo == null)
+            {
+                throw new ApplicationException("Dependency not set");
+            }
+
+            return repo.Get(filter, propertiesNames, tracked);
+        }
+
+        public IEnumerable<ShoeSize>? GetAll(Expression<Func<ShoeSize, bool>>? filter = null, Func<IQueryable<ShoeSize>, IOrderedQueryable<ShoeSize>>? orderBy = null, string? propertiesNames = null)
+        {
+            return repo!.GetAll(filter, orderBy, propertiesNames);
         }
 
         public List<ShoeSize> GetLista()

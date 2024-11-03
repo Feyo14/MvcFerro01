@@ -1,5 +1,6 @@
 ﻿
 using EFCoresFerro.Datos;
+using EFCoresFerro.Datos.Repositorio;
 using Microsoft.EntityFrameworkCore;
 using MvcFerro.Datos;
 using MvcFerro.Datos.Interfaces;
@@ -9,15 +10,15 @@ using System.Numerics;
 
 namespace EFCore3.DATOS.Repositorio
 {
-    public class RepositorioShoeSize : IRepositorioShoeSize
+    public class RepositorioShoeSize : GenericRepository<ShoeSize>, IRepositorioShoeSize
     {
         private readonly EFCoresDbContext context;
 
-        public RepositorioShoeSize(EFCoresDbContext _context)
+        public RepositorioShoeSize(EFCoresDbContext db) : base(db)
         {
-           context = _context;
+            context = db ?? throw new ArgumentNullException(nameof(db));
         }
-      
+
         public void Agregar(ShoeSize shoes)
         {
             context.ShoeSize.Add(shoes);
