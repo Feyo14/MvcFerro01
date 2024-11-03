@@ -58,7 +58,7 @@ private readonly EFCoresDbContext _dbContext;
             ShoeSize gInDb = repo.GetShoeSizePorId(s.ShoeSizeId);
             if (gInDb != null)
             {
-                string tex = s.Shoe.Descripcion;
+                string tex = s.Shoe.Descripcion.ToString();
                 s.Size = null;
                 s.Shoe = null;
               
@@ -66,7 +66,7 @@ private readonly EFCoresDbContext _dbContext;
                 _unitOfWork.SaveChanges(); // Guardar cambios para confirmar eliminación 
 
                 _unitOfWork.Commit(); // Confirmar los cambios
-                Console.WriteLine($"Shoe:  {tex} borrado!!!");
+                Console.WriteLine($"ShoeSize:  {tex} borrado!!!");
             }
             else
             {

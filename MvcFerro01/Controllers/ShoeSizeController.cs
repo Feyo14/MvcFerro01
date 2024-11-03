@@ -258,8 +258,9 @@ namespace MvcFerro01.Controllers
             {
                 return NotFound();
             }
-            ShoeSize? category= service?.GetShoeSizePorId(id.Value);
-            if (category is null)
+            ShoeSize? shoesize= service?.GetShoeSizePorId(id.Value);
+            shoesize.Shoe = serviceB.GetShoePorId(shoesize.ShoeId);
+            if (shoesize is null)
             {
                 return NotFound();
             }
@@ -274,7 +275,7 @@ namespace MvcFerro01.Controllers
                 {
                //     return Json(new { success = false, message="Related Record... Delete Deny!!" }); ;
                 }
-                service.Borrar(category);
+                service.Borrar(shoesize);
                 return Json(new { success = true, message = "Record successfully deleted" });
             }
             catch (Exception)
