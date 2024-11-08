@@ -22,17 +22,8 @@
             <label asp-for="Active"></label>
             <input asp-for="Active" class="checkbox" />
             <span asp-validation-for="Active" class="text-danger"></span>
+        </div>
 
-        </div>
-        <div class="col-4 text-center">
-            <img src="@Model.ImageUrl" style="width:200px;height:300px; border:1px solid" />
-            <div class="form-group py-2">
-                <div>
-                    <label for="RemoveImage">Remove current image</label>
-                    <input type="checkbox" id="RemoveImage" name="RemoveImage" value="true" />
-                </div>
-            </div>
-        </div>
        
         @if (Model.BrandId == 0)
         {

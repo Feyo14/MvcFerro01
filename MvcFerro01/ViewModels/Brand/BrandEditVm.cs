@@ -14,7 +14,7 @@ namespace MvcFerro01.ViewModels.Brand.BrandEditVm
         [MaxLength(256, ErrorMessage = "{0} must have less than 257 characters")]
         public string BrandName { get; set; } = null!;
         public bool Active { get; set; }
-        public string ImageUrl { get; set; } 
+      //  public string ImageUrl { get; set; } 
 
         [ValidateNever]
 
