@@ -202,7 +202,7 @@ namespace MvcFerro01.Controllers
             {
                 ShoeSize SVm = _mapper.Map<ShoeSize>(shoVm);
 
-                if (service.existe(SVm))
+                if (!service.existe(SVm))
                 {
                     shoVm.Shoe = serviceB!
                                  .GetAll(orderBy: q => q.OrderBy(c => c.Descripcion))
@@ -221,10 +221,11 @@ namespace MvcFerro01.Controllers
 
                     return View(shoVm);
                 }
-
-                service.Agregar(SVm);
-                TempData["success"] = "Record successfully added/edited";
-                return RedirectToAction("Index");
+             
+           service.Agregar(SVm);
+           TempData["success"] = "Record successfully added/edited";
+           return RedirectToAction("Index");
+                
             }
             catch (Exception ex)
             {

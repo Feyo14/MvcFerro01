@@ -31,7 +31,8 @@ namespace EFCore3.DATOS.Repositorio
 
         public void Editar(ShoeSize shoe)
         {
-          
+            int stock = shoe.QuantityInStock;
+
             var s = context.ShoeSize
         .FirstOrDefault(t => t.ShoeSizeId == shoe.ShoeSizeId);
             var Sho = context.Shoes
@@ -60,7 +61,7 @@ namespace EFCore3.DATOS.Repositorio
                 s.Size = size;
 
             }
-           
+            s.QuantityInStock = stock;
             context.ShoeSize.Update(s);      
         }
 
