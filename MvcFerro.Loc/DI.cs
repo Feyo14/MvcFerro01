@@ -89,6 +89,7 @@ public static class DI
 
 
         servicios.AddDbContext<EFCoresDbContext>(optiones =>
+
         {
             optiones.UseSqlServer(@"Data Source=.; 
                         Initial Catalog=EFCoresFerro; 

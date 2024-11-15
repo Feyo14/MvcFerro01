@@ -77,9 +77,9 @@ namespace EFCore3.DATOS.Repositorio
             else
             {
                 return context.ShoeSize.Any(
-                     p => p.ShoeSizeId == d.ShoeSizeId);
-                      //  p.SizeId == d.SizeId);
-             //  p.ShoeSizeId != p.ShoeSizeId);
+                     p => p.ShoeId == d.ShoeId &&
+                        p.SizeId == d.SizeId &&
+               p.QuantityInStock == d.QuantityInStock);
             }
         }
 
